@@ -22,7 +22,6 @@ class CalculatorViewController: UIViewController {
     }
     
     func actualizacionTransp() {
-        EmisionTransp.text = BotonActTransp(<#T##sender: Any##Any#>)
 
     }
     
