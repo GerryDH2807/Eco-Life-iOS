@@ -14,12 +14,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBOutlet weak var EmisionTransp: UILabel!
-    
-    @IBAction func BotonActTransp(_ sender: Any) {
-        
-        
-        
-    }
+
     
     func actualizacionTransp() {
 
