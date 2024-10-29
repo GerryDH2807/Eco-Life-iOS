@@ -5,4 +5,10 @@
 //  Created by Administrador on 18/10/24.
 //
 
-import Foundation
+import UIKit
+
+class DesechosCollectionViewCell:UICollectionViewCell{
+    
+    @IBOutlet weak var labelFactorDesecho: UILabel!
+}
+

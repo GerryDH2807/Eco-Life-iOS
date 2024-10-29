@@ -7,17 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830E6D4F2CBD8C1D00D0299A /* ConnectionFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D4E2CBD8C1D00D0299A /* ConnectionFile.m */; };
+		830E6D5E2CBD8E0800D0299A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D5C2CBD8E0800D0299A /* FMResultSet.m */; };
+		830E6D5F2CBD8E0800D0299A /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D552CBD8E0800D0299A /* FMDatabaseAdditions.m */; };
+		830E6D602CBD8E0800D0299A /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D592CBD8E0800D0299A /* FMDatabaseQueue.m */; };
+		830E6D612CBD8E0800D0299A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D532CBD8E0800D0299A /* FMDatabase.m */; };
+		830E6D622CBD8E0800D0299A /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D572CBD8E0800D0299A /* FMDatabasePool.m */; };
+		830E6D632CBD8E0800D0299A /* info-xrOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 830E6D5D2CBD8E0800D0299A /* info-xrOS.plist */; };
+		830E6D652CBD8EB600D0299A /* EcoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D642CBD8EB600D0299A /* EcoApp.swift */; };
+		830E6D672CBD8F1600D0299A /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D662CBD8F1600D0299A /* ModelManager.swift */; };
+		830E6D692CBD9E4800D0299A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D682CBD9E4800D0299A /* TestViewController.swift */; };
+		838D2E022CD02A66008199D8 /* LugaresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838D2E012CD02A66008199D8 /* LugaresViewController.swift */; };
+		838F6DCE2CC3119900F050DB /* DesechosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838F6DCD2CC3119900F050DB /* DesechosCollectionViewCell.swift */; };
+		838F6DD02CC312D900F050DB /* FormsDeseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838F6DCF2CC312D900F050DB /* FormsDeseViewController.swift */; };
 		83A4D4E42CA5CBC40026B3C4 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4D4E32CA5CBBD0026B3C4 /* CalculatorViewController.swift */; };
+		83B0E21D2CC194960067053E /* pruebas.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 83B0E21C2CC194960067053E /* pruebas.sqlite */; };
+		83B0E24F2CC1A8340067053E /* FactoresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B0E24E2CC1A8340067053E /* FactoresCollectionViewCell.swift */; };
 		83B1E22E2C861EA500B9BEDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */; };
 		83B1E2302C861EA500B9BEDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1E22F2C861EA500B9BEDC /* SceneDelegate.swift */; };
 		83B1E2322C861EA500B9BEDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1E2312C861EA500B9BEDC /* ViewController.swift */; };
 		83B1E2352C861EA500B9BEDC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83B1E2342C861EA500B9BEDC /* Base */; };
 		83B1E2372C861EA700B9BEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B1E2362C861EA700B9BEDC /* Assets.xcassets */; };
 		83B1E23A2C861EA700B9BEDC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83B1E2392C861EA700B9BEDC /* Base */; };
+		83DA94F62CCD577E003ECE5F /* AlimentosFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */; };
+		83DA94F82CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA94F72CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		830E6D4D2CBD8C1D00D0299A /* baseecolife-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "baseecolife-Bridging-Header.h"; sourceTree = "<group>"; };
+		830E6D4E2CBD8C1D00D0299A /* ConnectionFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectionFile.m; sourceTree = "<group>"; };
+		830E6D512CBD8C3F00D0299A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		830E6D522CBD8E0800D0299A /* FMDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		830E6D532CBD8E0800D0299A /* FMDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		830E6D542CBD8E0800D0299A /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		830E6D552CBD8E0800D0299A /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		830E6D562CBD8E0800D0299A /* FMDatabasePool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		830E6D572CBD8E0800D0299A /* FMDatabasePool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		830E6D582CBD8E0800D0299A /* FMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		830E6D592CBD8E0800D0299A /* FMDatabaseQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		830E6D5A2CBD8E0800D0299A /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		830E6D5B2CBD8E0800D0299A /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		830E6D5C2CBD8E0800D0299A /* FMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		830E6D5D2CBD8E0800D0299A /* info-xrOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "info-xrOS.plist"; sourceTree = "<group>"; };
+		830E6D642CBD8EB600D0299A /* EcoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoApp.swift; sourceTree = "<group>"; };
+		830E6D662CBD8F1600D0299A /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		830E6D682CBD9E4800D0299A /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		83594C3A2CD1925300A68CE1 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		83594C3C2CD1925300A68CE1 /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		83594C3D2CD1925300A68CE1 /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		838D2E012CD02A66008199D8 /* LugaresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LugaresViewController.swift; sourceTree = "<group>"; };
+		838F6DCD2CC3119900F050DB /* DesechosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesechosCollectionViewCell.swift; sourceTree = "<group>"; };
+		838F6DCF2CC312D900F050DB /* FormsDeseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsDeseViewController.swift; sourceTree = "<group>"; };
 		83A4D4E32CA5CBBD0026B3C4 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		83B0E21C2CC194960067053E /* pruebas.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pruebas.sqlite; sourceTree = "<group>"; };
+		83B0E24E2CC1A8340067053E /* FactoresCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoresCollectionViewCell.swift; sourceTree = "<group>"; };
 		83B1E22A2C861EA500B9BEDC /* baseecolife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseecolife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83B1E22F2C861EA500B9BEDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +69,8 @@
 		83B1E2362C861EA700B9BEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83B1E2392C861EA700B9BEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83B1E23B2C861EA700B9BEDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentosFormsViewController.swift; sourceTree = "<group>"; };
+		83DA94F72CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentosCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,11 +84,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		830E6D502CBD8C3E00D0299A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				830E6D512CBD8C3F00D0299A /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83B1E2212C861EA500B9BEDC = {
 			isa = PBXGroup;
 			children = (
+				830E6D522CBD8E0800D0299A /* FMDatabase.h */,
+				830E6D532CBD8E0800D0299A /* FMDatabase.m */,
+				830E6D542CBD8E0800D0299A /* FMDatabaseAdditions.h */,
+				830E6D552CBD8E0800D0299A /* FMDatabaseAdditions.m */,
+				83594C3A2CD1925300A68CE1 /* FMDatabaseQueue.h */,
+				83594C3C2CD1925300A68CE1 /* FMDB.h */,
+				83594C3D2CD1925300A68CE1 /* FMResultSet.h */,
+				830E6D562CBD8E0800D0299A /* FMDatabasePool.h */,
+				830E6D572CBD8E0800D0299A /* FMDatabasePool.m */,
+				830E6D582CBD8E0800D0299A /* FMDatabaseQueue.h */,
+				830E6D592CBD8E0800D0299A /* FMDatabaseQueue.m */,
+				830E6D5A2CBD8E0800D0299A /* FMDB.h */,
+				830E6D5B2CBD8E0800D0299A /* FMResultSet.h */,
+				830E6D5C2CBD8E0800D0299A /* FMResultSet.m */,
+				830E6D5D2CBD8E0800D0299A /* info-xrOS.plist */,
+				830E6D4E2CBD8C1D00D0299A /* ConnectionFile.m */,
 				83B1E22C2C861EA500B9BEDC /* baseecolife */,
 				83B1E22B2C861EA500B9BEDC /* Products */,
+				830E6D4D2CBD8C1D00D0299A /* baseecolife-Bridging-Header.h */,
+				830E6D642CBD8EB600D0299A /* EcoApp.swift */,
+				830E6D662CBD8F1600D0299A /* ModelManager.swift */,
+				830E6D502CBD8C3E00D0299A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,11 +131,19 @@
 		83B1E22C2C861EA500B9BEDC /* baseecolife */ = {
 			isa = PBXGroup;
 			children = (
+				83B0E21C2CC194960067053E /* pruebas.sqlite */,
 				83A4D4E32CA5CBBD0026B3C4 /* CalculatorViewController.swift */,
 				83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */,
 				83B1E22F2C861EA500B9BEDC /* SceneDelegate.swift */,
 				83B1E2312C861EA500B9BEDC /* ViewController.swift */,
 				83B1E2332C861EA500B9BEDC /* Main.storyboard */,
+				838F6DCF2CC312D900F050DB /* FormsDeseViewController.swift */,
+				838F6DCD2CC3119900F050DB /* DesechosCollectionViewCell.swift */,
+				83DA94F72CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift */,
+				83B0E24E2CC1A8340067053E /* FactoresCollectionViewCell.swift */,
+				83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */,
+				838D2E012CD02A66008199D8 /* LugaresViewController.swift */,
+				830E6D682CBD9E4800D0299A /* TestViewController.swift */,
 				83B1E2362C861EA700B9BEDC /* Assets.xcassets */,
 				83B1E2382C861EA700B9BEDC /* LaunchScreen.storyboard */,
 				83B1E23B2C861EA700B9BEDC /* Info.plist */,
@@ -102,6 +183,7 @@
 				TargetAttributes = {
 					83B1E2292C861EA500B9BEDC = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1600;
 					};
 				};
 			};
@@ -130,6 +212,8 @@
 			files = (
 				83B1E2372C861EA700B9BEDC /* Assets.xcassets in Resources */,
 				83B1E23A2C861EA700B9BEDC /* Base in Resources */,
+				830E6D632CBD8E0800D0299A /* info-xrOS.plist in Resources */,
+				83B0E21D2CC194960067053E /* pruebas.sqlite in Resources */,
 				83B1E2352C861EA500B9BEDC /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,9 +226,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				83B1E2322C861EA500B9BEDC /* ViewController.swift in Sources */,
+				830E6D4F2CBD8C1D00D0299A /* ConnectionFile.m in Sources */,
+				830E6D5E2CBD8E0800D0299A /* FMResultSet.m in Sources */,
+				830E6D5F2CBD8E0800D0299A /* FMDatabaseAdditions.m in Sources */,
+				83DA94F62CCD577E003ECE5F /* AlimentosFormsViewController.swift in Sources */,
+				830E6D652CBD8EB600D0299A /* EcoApp.swift in Sources */,
+				830E6D692CBD9E4800D0299A /* TestViewController.swift in Sources */,
+				838F6DCE2CC3119900F050DB /* DesechosCollectionViewCell.swift in Sources */,
+				830E6D672CBD8F1600D0299A /* ModelManager.swift in Sources */,
+				83DA94F82CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift in Sources */,
+				830E6D602CBD8E0800D0299A /* FMDatabaseQueue.m in Sources */,
+				830E6D612CBD8E0800D0299A /* FMDatabase.m in Sources */,
+				830E6D622CBD8E0800D0299A /* FMDatabasePool.m in Sources */,
 				83B1E22E2C861EA500B9BEDC /* AppDelegate.swift in Sources */,
 				83A4D4E42CA5CBC40026B3C4 /* CalculatorViewController.swift in Sources */,
+				83B0E24F2CC1A8340067053E /* FactoresCollectionViewCell.swift in Sources */,
 				83B1E2302C861EA500B9BEDC /* SceneDelegate.swift in Sources */,
+				838F6DD02CC312D900F050DB /* FormsDeseViewController.swift in Sources */,
+				838D2E022CD02A66008199D8 /* LugaresViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -311,6 +411,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mx.tec.a01736342.baseecolife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "baseecolife-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -321,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -338,6 +441,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mx.tec.a01736342.baseecolife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "baseecolife-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

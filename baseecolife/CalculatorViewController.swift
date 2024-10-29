@@ -13,12 +13,7 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBOutlet weak var EmisionTransp: UILabel!
-
     
-    func actualizacionTransp() {
-
-    }
     
     
 }

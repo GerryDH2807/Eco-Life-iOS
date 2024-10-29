@@ -5,4 +5,10 @@
 //  Created by Administrador on 17/10/24.
 //
 
-import Foundation
+import UIKit
+
+class FactoresCollectionViewCell:UICollectionViewCell{
+    
+    @IBOutlet weak var labelFactor: UILabel!
+    
+}
