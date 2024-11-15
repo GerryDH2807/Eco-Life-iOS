@@ -5,4 +5,11 @@
 //  Created by Administrador on 31/10/24.
 //
 
-import Foundation
+import UIKit
+
+class FormsTranspViewController: UIViewController{
+    
+    @IBAction func cerrar(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+}

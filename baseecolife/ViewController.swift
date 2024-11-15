@@ -1,14 +1,16 @@
-//
-//  ViewController.swift
-//  baseecolife
-//
-//  Created by Administrador on 02/09/24.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    // Imágenes outlets para cada día de la semana
+    @IBOutlet weak var lunesImage: UIImageView!
+    @IBOutlet weak var martesImage: UIImageView!
+    @IBOutlet weak var miercolesImage: UIImageView!
+    @IBOutlet weak var juevesImage: UIImageView!
+    @IBOutlet weak var viernesImage: UIImageView!
+    @IBOutlet weak var sabadoImage: UIImageView!
+    @IBOutlet weak var domingoImage: UIImageView!
+    
     // Arreglos para almacenar los títulos y descripciones
     let titulos = ["Título 1", "Título 2", "Título 3", "Título 4", "Título 5"]
     let descripciones = [
@@ -19,9 +21,8 @@ class ViewController: UIViewController {
         "Descripción del reto 5."
     ]
     
-    
     let diccionariotest: [String: Int] = [
-        "No hay reto prueba" :0,
+        "No hay reto prueba": 0,
         "Reto de prueba 1": 1,
         "Reto de prueba 2": 2,
         "Reto de prueba 3": 3,
@@ -32,85 +33,163 @@ class ViewController: UIViewController {
         "Reto de prueba 8": 8,
         "Reto de prueba 9": 9,
         "Reto de prueba 10": 10
-        
     ]
-
+    
     // Índice actual del carrusel
     var indiceActual = 0
     var indiceReto = 0
-
+    
+    @IBOutlet weak var ciclosDeRacha: UILabel!
     // Outlets para los elementos de la interfaz
     @IBOutlet weak var TituloReco: UILabel!
     @IBOutlet weak var RecoInfo: UITextView!
     @IBOutlet weak var retoActivo: UILabel!
     
+    // Variables para el control de la racha
+    var rachaActiva = true  // Estado de la racha (si está activa o rota)
+    var contadorRacha = 0  // Contador de la racha actual
+    var imagenesDeRacha = [UIImage(named: "path133-7-6.png"),
+                           UIImage(named: "path133-7-7.png"),
+                           UIImage(named: "path133-7-8.png")]  // Los estados de las imágenes
+
+    @IBOutlet weak var generarRetoButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Cargar el primer título y descripción
-        let docName = "pruebas"
-        let docExt = "sqlite"
+        
+        let docName = "DatabaseEco"
+        let docExt = "sqlite3"
         copyFilesToDocumentsFolder(nameForFile: docName, extForFile: docExt)
         actualizarVista()
         
+        NotificationCenter.default.addObserver(forName: Notification.Name("EmisionesTransAdded"), object: nil, queue: .main) { [weak self] _ in
+            self?.verificarYIncrementarRacha()
+        }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name("EmisionesAliAdded"), object: nil, queue: .main) { [weak self] _ in
+            self?.verificarYIncrementarRacha()
+        }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name("EmisionesDeseAdded"), object: nil, queue: .main) { [weak self] _ in
+            self?.verificarYIncrementarRacha()
+        }
+
     }
-    
-    func copyFilesToDocumentsFolder(nameForFile: String, extForFile: String){
+
+    func copyFilesToDocumentsFolder(nameForFile: String, extForFile: String) {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         let destURL = documentsURL!.appendingPathComponent(nameForFile).appendingPathExtension(extForFile)
-        guard let sourceURL = Bundle.main.url(forResource: nameForFile, withExtension: extForFile)
-        else{
-            print("Sorce file not found")
+
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: destURL.path) {
+            do {
+                try fileManager.removeItem(at: destURL)
+                print("Archivo existente eliminado")
+            } catch {
+                print("Error al eliminar el archivo existente: \(error)")
+            }
+        }
+
+        guard let sourceURL = Bundle.main.url(forResource: nameForFile, withExtension: extForFile) else {
+            print("Source file not found")
             return
         }
-        let fileManager = FileManager.default
-        do{
+
+        do {
             try fileManager.copyItem(at: sourceURL, to: destURL)
+            print("Archivo copiado exitosamente")
         } catch {
-            print("Unable to copy file")
+            print("Unable to copy file: \(error)")
+        }
+    }
+
+    // Función para verificar si se puede incrementar la racha
+    func verificarYIncrementarRacha() {
+        if !generarRetoButton.isEnabled && rachaActiva {
+            incrementarRacha()
+        }
+    }
+
+    // Función que actualiza la racha de manera independiente
+    func incrementarRacha() {
+        contadorRacha += 1
+        actualizarImágenesRacha()
+        verificarRachaCompletada()
+    }
+
+    // Función que resetea la racha de manera independiente
+    func resetearRacha() {
+        contadorRacha = 0
+        rachaActiva = false
+        actualizarImágenesRacha()
+        print("La racha se ha roto")
+    }
+
+    // Función para actualizar las imágenes de la racha de manera independiente
+    func actualizarImágenesRacha() {
+        let imagenActual = rachaActiva ? imagenesDeRacha[0] : imagenesDeRacha[2]
+        
+        switch contadorRacha {
+        case 1:
+            lunesImage.image = imagenActual
+        case 2:
+            martesImage.image = imagenActual
+        case 3:
+            miercolesImage.image = imagenActual
+        case 4:
+            juevesImage.image = imagenActual
+        case 5:
+            viernesImage.image = imagenActual
+        case 6:
+            sabadoImage.image = imagenActual
+        case 7:
+            domingoImage.image = imagenActual
+        default:
+            break
+        }
+    }
+    
+    var ciclosDeRachaCount = 0
+
+    // Función para verificar si la racha ha sido completada
+    func verificarRachaCompletada() {
+        if contadorRacha >= 7 {
+            ciclosDeRachaCount += 1
+            
+            // Actualiza el UILabel con el nuevo contador
+            ciclosDeRacha.text = String(ciclosDeRachaCount)
+            resetearRacha()
         }
     }
 
     @IBAction func BotonIzquCar(_ sender: Any) {
-        // Decrementar el índice y manejar el carrusel circular
         indiceActual = (indiceActual - 1 + titulos.count) % titulos.count
         actualizarVista()
     }
 
     @IBAction func BotonDerCar(_ sender: Any) {
-        // Incrementar el índice y manejar el carrusel circular
         indiceActual = (indiceActual + 1) % titulos.count
         actualizarVista()
     }
-    
-    
+
     @IBAction func generarReto(_ sender: Any) {
+        generarRetoButton.isEnabled = false
         indiceReto = Int.random(in: 1...10)
         actualizarVista()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 43200) {
+            self.generarRetoButton.isEnabled = true
+        }
     }
-    
-    
-    
-    
-    
-    
 
-    // Función para actualizar la vista con el título y descripción actual
     func actualizarVista() {
         TituloReco.text = titulos[indiceActual]
         RecoInfo.text = descripciones[indiceActual]
 
-        // Obtener el valor del diccionario usando el índice del reto
         if let retoTexto = diccionariotest.first(where: { $0.value == indiceReto })?.key {
             retoActivo.text = retoTexto
         } else {
             retoActivo.text = "Reto no encontrado"
         }
     }
-    
-    
-    
-    
-    
-    
 }
-

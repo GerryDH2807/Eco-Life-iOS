@@ -1,64 +1,276 @@
-//
-//  ModelManager.swift
-//  baseecolife
-//
-//  Created by Administrador on 14/10/24.
-//
 import Foundation
 
 let sharedInstance = ModelManager()
 
-class ModelManager: NSObject{
-    var database : FMDatabase?
-    
-    class var instance: ModelManager{
-        let documentsFolder = NSSearchPathForDirectoriesInDomains (.documentDirectory, .userDomainMask, true)[0] as String
-        let databaseFileName = "pruebas.sqlite"
-                let path = (documentsFolder as NSString).appendingPathComponent(databaseFileName)
-                
-                sharedInstance.database = FMDatabase(path: path)
+class ModelManager: NSObject {
+    var database: FMDatabase?
+
+    class var instance: ModelManager {
+        let documentsFolder = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let databaseFileName = "DatabaseEco.sqlite3"
+        let path = (documentsFolder as NSString).appendingPathComponent(databaseFileName)
+        
+        sharedInstance.database = FMDatabase(path: path)
         return sharedInstance
     }
-    
-    func createDatabase() -> Bool {
+
+    func findFactoresTransp(tipoFact: Int) -> [Factores] {
+        var factoresList: [Factores] = [] // Array para almacenar los factores
         sharedInstance.database!.open()
-        let isCreated = sharedInstance.database!.executeUpdate(
-            "CREATE TABLE IF NOT EXISTS EmisionBasura( ID_Desecho   INTEGER, FactorDes   INTEGER, ValorDes    REAL, PRIMARY KEY(ID_Desecho AUTOINCREMENT),FOREIGN KEY(FactorDes) REFERENCES FactorBasura(ID_FactorDes));CREATE TABLE IF NOT EXISTS FactorBasura (ID_FactorDes   INTEGER,Nombre   TEXT,Valor   REAL,PRIMARY KEY(ID_FactorDes AUTOINCREMENT));COMMIT;",
-            withArgumentsIn: [])
+
+        // Ejecutar consulta y verificar errores
+        if let resultSet = sharedInstance.database!.executeQuery("SELECT Nombre, Valor FROM FactorTransporte WHERE TipoFact = ?", withArgumentsIn: [tipoFact]) {
+            print("Consulta ejecutada correctamente para tipoFact = \(tipoFact)")
+            while resultSet.next() {
+                let fact = Factores()
+                if let nombreFactor = resultSet.string(forColumn: "Nombre") {
+                    fact.nameFactor = nombreFactor
+                    fact.valorFactor = Float(resultSet.double(forColumn: "Valor"))
+                    factoresList.append(fact) // Agregar el objeto Factores al array
+                }
+            }
+            resultSet.close() // Cerrar el resultSet
+        } else {
+            print("Error al ejecutar la consulta: \(sharedInstance.database!.lastErrorMessage())")
+        }
+
         sharedInstance.database!.close()
-        return isCreated
+        print("Factores encontrados: \(factoresList)")
+        return factoresList // Devolver el array de Factores
     }
-    
-    func addMovie(name: String, review: Int) -> Bool {
+
+    func findFactoresAli(tipoFact: Int) -> [Factores] {
+        var factoresList: [Factores] = [] // Array para almacenar los factores
         sharedInstance.database!.open()
-        let isInserted = sharedInstance.database!.executeUpdate("INSERT INTO EmisionEnergia (FactorEner, ValorEner) VALUES(?, ?)", withArgumentsIn: [name, review])
+
+        // Ejecutar consulta y verificar errores
+        if let resultSet = sharedInstance.database!.executeQuery("SELECT Nombre, Valor FROM FactorAlimento WHERE TipoFact = ?", withArgumentsIn: [tipoFact]) {
+            print("Consulta ejecutada correctamente para tipoFact = \(tipoFact)")
+            while resultSet.next() {
+                let fact = Factores()
+                if let nombreFactor = resultSet.string(forColumn: "Nombre") {
+                    fact.nameFactor = nombreFactor
+                    fact.valorFactor = Float(resultSet.double(forColumn: "Valor"))
+                    factoresList.append(fact) // Agregar el objeto Factores al array
+                }
+            }
+            resultSet.close() // Cerrar el resultSet
+        } else {
+            print("Error al ejecutar la consulta: \(sharedInstance.database!.lastErrorMessage())")
+        }
+
+        sharedInstance.database!.close()
+        print("Factores encontrados: \(factoresList)")
+        return factoresList // Devolver el array de Factores
+    }
+
+    func findFactoresDese(tipoFact: Int) -> [Factores] {
+        var factoresList: [Factores] = [] // Array para almacenar los factores
+        sharedInstance.database!.open()
+
+        // Ejecutar consulta y verificar errores
+        if let resultSet = sharedInstance.database!.executeQuery("SELECT Nombre, Valor FROM FactorBasura WHERE TipoFac = ?", withArgumentsIn: [tipoFact]) {
+            print("Consulta ejecutada correctamente para tipoFact = \(tipoFact)")
+            while resultSet.next() {
+                let fact = Factores()
+                if let nombreFactor = resultSet.string(forColumn: "Nombre") {
+                    fact.nameFactor = nombreFactor
+                    fact.valorFactor = Float(resultSet.double(forColumn: "Valor"))
+                    factoresList.append(fact) // Agregar el objeto Factores al array
+                }
+            }
+            resultSet.close() // Cerrar el resultSet
+        } else {
+            print("Error al ejecutar la consulta: \(sharedInstance.database!.lastErrorMessage())")
+        }
+
+        sharedInstance.database!.close()
+        print("Factores encontrados: \(factoresList)")
+        return factoresList // Devolver el array de Factores
+    }
+
+    func obtenerHistorial(fechaBusqueda: String) -> Historial? {
+        print("Attempting to fetch data for date: \(fechaBusqueda)")
+        sharedInstance.database!.open()
+        
+        var historial: Historial? = nil
+        if let resultSet = sharedInstance.database!.executeQuery(
+            "SELECT * FROM Historial WHERE Fecha = ?;", withArgumentsIn: [fechaBusqueda]) {
+            
+            if resultSet.next() {
+                historial = Historial(resultSet: resultSet)
+                print("Data retrieved for \(fechaBusqueda): \(String(describing: historial))")
+            } else {
+                print("No data found for date: \(fechaBusqueda)")
+            }
+            resultSet.close()
+        } else {
+            print("Query error: \(sharedInstance.database!.lastErrorMessage())")
+        }
+        
+        sharedInstance.database!.close()
+        return historial
+    }
+
+    func obtenerPruebaSubida(fechaBusqueda: String) -> PrubasDeBase {
+        let hist = PrubasDeBase()
+        sharedInstance.database!.open()
+        
+        let resultSet = sharedInstance.database!.executeQuery(
+            "SELECT ValorTrans, ValorFactor FROM EmisionTransporte WHERE FechaCarga = ?",
+            withArgumentsIn: [fechaBusqueda]
+        )
+        
+        if let resultSet = resultSet, resultSet.next() {
+            hist.pruebasSalperra = Float(resultSet.double(forColumn: "ValorTrans"))
+            hist.pruebaFactor = Int(resultSet.int(forColumn: "ValorFactor"))
+        }
+        
+        sharedInstance.database!.close()
+        return hist
+    }
+
+    func addEmisionTransp(emisionUsuarioTransp: Float, fechaCarga: String, valorFactor: Float) -> Bool {
+        sharedInstance.database!.open()
+        let isInserted = sharedInstance.database!.executeUpdate(
+            "INSERT INTO EmisionTransporte (ValorTrans, FechaCarga, ValorFactor) VALUES (?, ?, ?);",
+            withArgumentsIn: [emisionUsuarioTransp, fechaCarga, valorFactor]
+        )
+        
         sharedInstance.database!.close()
         return isInserted
+    }
+    
+    func addEmisionAli(emisionUsuarioAli: Float, fechaCarga: String, valorFactor: Float) -> Bool {
+        sharedInstance.database!.open()
+        let isInserted = sharedInstance.database!.executeUpdate(
+            "INSERT INTO EmisionAlimentos (ValorAli, FechaCarga, ValorFactor) VALUES (?, ?, ?);",
+            withArgumentsIn: [emisionUsuarioAli, fechaCarga, valorFactor]
+        )
         
+        sharedInstance.database!.close()
+        return isInserted
     }
     
-    func findTest (name: String) -> Movie {
-        let mov = Movie()
+    func addEmisionDese(emisionUsuarioDese: Float, fechaCarga: String, valorFactor: Float) -> Bool {
+        
+        print("Intentando agregar emisión DESECHO con valores: \(emisionUsuarioDese), \(fechaCarga), \(valorFactor)")
+        
         sharedInstance.database!.open()
-        let resultSet = sharedInstance.database!.executeQuery("SELECT * FROM EmisionTransporte WHERE FactorTransp=?", withArgumentsIn: [name])
-        if resultSet != nil && (resultSet?.next())! {
-            mov.id = Int((resultSet?.int(forColumn: "FactorTransp"))!)
-            mov.name = name
-            mov.review = Int((resultSet?.int(forColumn: "ValorTransp"))!)
+        let isInserted = sharedInstance.database!.executeUpdate(
+            "INSERT INTO EmisionBasura (ValorDes, FechaCarga, ValorFactor) VALUES (?, ?, ?);",
+            withArgumentsIn: [emisionUsuarioDese, fechaCarga, valorFactor]
+        )
+        
+        sharedInstance.database!.close()
+        return isInserted
+    }
+    
+    func addFactorTransporte(nombre: String) -> Bool {
+        sharedInstance.database!.open()
+        let tipoFact = 4 // Tipo fijo para los factores creados
+        let isInserted = sharedInstance.database!.executeUpdate(
+            "INSERT INTO FactorTransporte (Nombre, TipoFact) VALUES (?, ?);",
+            withArgumentsIn: [nombre, tipoFact]
+        )
+        sharedInstance.database!.close()
+        
+        if !isInserted {
+            print("Error al insertar el factor de transporte: \(sharedInstance.database!.lastErrorMessage())")
         }
-        sharedInstance.database!.close()
-        return mov
+        
+        return isInserted
     }
-    
-    func deleteTest(name: String) -> Bool{
+
+
+    func RecuperarEmisionesSubidas(FechaSubida: String) -> [ListaDeEmisionesSeleccionadas] {
+        var EmisionesSubidas: [ListaDeEmisionesSeleccionadas] = []
         sharedInstance.database!.open()
-        let isDeleted = sharedInstance.database!.executeUpdate("DELETE FROM test WHERE name=?", withArgumentsIn: [name])
+        
+        if let resultSet = sharedInstance.database!.executeQuery("SELECT ValorTrans, ValorFactor FROM EmisionTransporte WHERE FechaCarga = ?", withArgumentsIn: [FechaSubida]) {
+            while resultSet.next() {
+                let lis = ListaDeEmisionesSeleccionadas()
+                lis.valorUsuarioEmisionSubida = resultSet.double(forColumn: "ValorTrans")
+                lis.valorFactorSeleccionado = resultSet.double(forColumn: "ValorFactor")
+                EmisionesSubidas.append(lis)
+            }
+            resultSet.close()
+        }
+        
         sharedInstance.database!.close()
-        return isDeleted
+        return EmisionesSubidas
     }
     
+    func RecuperarEmisionesSubidasAli(FechaSubida: String) -> [ListaDeEmisionesSeleccionadas] {
+        var EmisionesSubidas: [ListaDeEmisionesSeleccionadas] = []
+        sharedInstance.database!.open()
+        
+        if let resultSet = sharedInstance.database!.executeQuery("SELECT ValorAli, ValorFactor FROM EmisionAlimentos WHERE FechaCarga = ?", withArgumentsIn: [FechaSubida]) {
+            while resultSet.next() {
+                let lis = ListaDeEmisionesSeleccionadas()
+                lis.valorUsuarioEmisionSubida = resultSet.double(forColumn: "ValorAli")
+                lis.valorFactorSeleccionado = resultSet.double(forColumn: "ValorFactor")
+                EmisionesSubidas.append(lis)
+            }
+            resultSet.close()
+        }
+        
+        sharedInstance.database!.close()
+        return EmisionesSubidas
+    }
     
+    func RecuperarEmisionesSubidasDese(FechaSubida: String) -> [ListaDeEmisionesSeleccionadas] {
+        var EmisionesSubidas: [ListaDeEmisionesSeleccionadas] = []
+        sharedInstance.database!.open()
+        
+        if let resultSet = sharedInstance.database!.executeQuery("SELECT ValorDes, ValorFactor FROM EmisionBasura WHERE FechaCarga = ?", withArgumentsIn: [FechaSubida]) {
+            while resultSet.next() {
+                let lis = ListaDeEmisionesSeleccionadas()
+                lis.valorUsuarioEmisionSubida = resultSet.double(forColumn: "ValorDes")
+                lis.valorFactorSeleccionado = resultSet.double(forColumn: "ValorFactor")
+                EmisionesSubidas.append(lis)
+            }
+            resultSet.close()
+        }
+        
+        sharedInstance.database!.close()
+        return EmisionesSubidas
+    }
+
+    func updateHistorialtrasEmision(SumaTotal: Double) -> Bool {
+        sharedInstance.database!.open()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let fechaActual = Date()
+        let fechaFormateada = dateFormatter.string(from: fechaActual)
+        
+        let isUpdated = sharedInstance.database!.executeUpdate("UPDATE Historial SET TotalTransporte = ? WHERE Fecha = ?", withArgumentsIn: [SumaTotal, fechaFormateada])
+        
+        sharedInstance.database!.close()
+        return isUpdated
+    }
     
+    func updateHistorialtrasEmisionAli(SumaTotal: Double) -> Bool {
+        sharedInstance.database!.open()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let fechaActual = Date()
+        let fechaFormateada = dateFormatter.string(from: fechaActual)
+        let isUpdated = sharedInstance.database!.executeUpdate("UPDATE Historial SET TotalAlimento = ? WHERE Fecha = ?", withArgumentsIn: [SumaTotal, fechaFormateada])
+        
+        sharedInstance.database!.close()
+        return isUpdated
+    }
     
-    
+    func updateHistorialtrasEmisionDese(SumaTotal: Double) -> Bool {
+        sharedInstance.database!.open()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let fechaActual = Date()
+        let fechaFormateada = dateFormatter.string(from: fechaActual)
+        let isUpdated = sharedInstance.database!.executeUpdate("UPDATE Historial SET TotalDesecho = ? WHERE Fecha = ?", withArgumentsIn: [SumaTotal, fechaFormateada])
+        
+        sharedInstance.database!.close()
+        return isUpdated
+    }
 }

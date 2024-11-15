@@ -17,11 +17,18 @@
 		830E6D652CBD8EB600D0299A /* EcoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D642CBD8EB600D0299A /* EcoApp.swift */; };
 		830E6D672CBD8F1600D0299A /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D662CBD8F1600D0299A /* ModelManager.swift */; };
 		830E6D692CBD9E4800D0299A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D682CBD9E4800D0299A /* TestViewController.swift */; };
+		83305FB52CD40A2D007582FD /* juegoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83305FB42CD40A2D007582FD /* juegoViewController.swift */; };
+		83305FB92CD420A2007582FD /* FormsTranspViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83305FB82CD420A2007582FD /* FormsTranspViewController.swift */; };
+		835578362CE43EBE00802EFD /* DGCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835578312CE439D400802EFD /* DGCharts.framework */; };
+		835578372CE43EBE00802EFD /* DGCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 835578312CE439D400802EFD /* DGCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83594C472CD1975600A68CE1 /* LugaresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83594C462CD1975600A68CE1 /* LugaresCollectionViewCell.swift */; };
+		838769E52CE58CA000BA7639 /* AlimentosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838769E42CE58CA000BA7639 /* AlimentosCollectionViewCell.swift */; };
+		838769E72CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838769E62CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift */; };
+		838769E92CE595C800BA7639 /* inputFormularioDesechosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838769E82CE595C800BA7639 /* inputFormularioDesechosCollectionViewCell.swift */; };
+		838769ED2CE5986F00BA7639 /* FormsDeseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838769EC2CE5986F00BA7639 /* FormsDeseViewController.swift */; };
 		838D2E022CD02A66008199D8 /* LugaresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838D2E012CD02A66008199D8 /* LugaresViewController.swift */; };
 		838F6DCE2CC3119900F050DB /* DesechosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838F6DCD2CC3119900F050DB /* DesechosCollectionViewCell.swift */; };
-		838F6DD02CC312D900F050DB /* FormsDeseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838F6DCF2CC312D900F050DB /* FormsDeseViewController.swift */; };
 		83A4D4E42CA5CBC40026B3C4 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A4D4E32CA5CBBD0026B3C4 /* CalculatorViewController.swift */; };
-		83B0E21D2CC194960067053E /* pruebas.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 83B0E21C2CC194960067053E /* pruebas.sqlite */; };
 		83B0E24F2CC1A8340067053E /* FactoresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B0E24E2CC1A8340067053E /* FactoresCollectionViewCell.swift */; };
 		83B1E22E2C861EA500B9BEDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */; };
 		83B1E2302C861EA500B9BEDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1E22F2C861EA500B9BEDC /* SceneDelegate.swift */; };
@@ -29,9 +36,42 @@
 		83B1E2352C861EA500B9BEDC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83B1E2342C861EA500B9BEDC /* Base */; };
 		83B1E2372C861EA700B9BEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B1E2362C861EA700B9BEDC /* Assets.xcassets */; };
 		83B1E23A2C861EA700B9BEDC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 83B1E2392C861EA700B9BEDC /* Base */; };
+		83D854292CD5575B003361BE /* InputFormularioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D854282CD5575B003361BE /* InputFormularioCollectionViewCell.swift */; };
+		83D8542B2CD56241003361BE /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8542A2CD56241003361BE /* DataPoint.swift */; };
 		83DA94F62CCD577E003ECE5F /* AlimentosFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */; };
-		83DA94F82CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA94F72CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift */; };
+		83F1F6782CE7C7DD00B8C236 /* DatabaseEco.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 83F1F6772CE7C7DD00B8C236 /* DatabaseEco.sqlite3 */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		835578302CE439D400802EFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 835578292CE439D400802EFD /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = DGCharts;
+		};
+		835578322CE439D400802EFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 835578292CE439D400802EFD /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = DGChartsTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		835578382CE43EBE00802EFD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				835578372CE43EBE00802EFD /* DGCharts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		830E6D4D2CBD8C1D00D0299A /* baseecolife-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "baseecolife-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -52,14 +92,20 @@
 		830E6D642CBD8EB600D0299A /* EcoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoApp.swift; sourceTree = "<group>"; };
 		830E6D662CBD8F1600D0299A /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		830E6D682CBD9E4800D0299A /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		83305FB42CD40A2D007582FD /* juegoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = juegoViewController.swift; sourceTree = "<group>"; };
+		83305FB82CD420A2007582FD /* FormsTranspViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsTranspViewController.swift; sourceTree = "<group>"; };
+		835578292CE439D400802EFD /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "/Users/Administrador/Desktop/Charts-master/Charts.xcodeproj"; sourceTree = "<absolute>"; };
 		83594C3A2CD1925300A68CE1 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
 		83594C3C2CD1925300A68CE1 /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		83594C3D2CD1925300A68CE1 /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		83594C462CD1975600A68CE1 /* LugaresCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LugaresCollectionViewCell.swift; sourceTree = "<group>"; };
+		838769E42CE58CA000BA7639 /* AlimentosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentosCollectionViewCell.swift; sourceTree = "<group>"; };
+		838769E62CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormularioAlimentoCollectionViewCell.swift; sourceTree = "<group>"; };
+		838769E82CE595C800BA7639 /* inputFormularioDesechosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputFormularioDesechosCollectionViewCell.swift; sourceTree = "<group>"; };
+		838769EC2CE5986F00BA7639 /* FormsDeseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsDeseViewController.swift; sourceTree = "<group>"; };
 		838D2E012CD02A66008199D8 /* LugaresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LugaresViewController.swift; sourceTree = "<group>"; };
 		838F6DCD2CC3119900F050DB /* DesechosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesechosCollectionViewCell.swift; sourceTree = "<group>"; };
-		838F6DCF2CC312D900F050DB /* FormsDeseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsDeseViewController.swift; sourceTree = "<group>"; };
 		83A4D4E32CA5CBBD0026B3C4 /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
-		83B0E21C2CC194960067053E /* pruebas.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pruebas.sqlite; sourceTree = "<group>"; };
 		83B0E24E2CC1A8340067053E /* FactoresCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoresCollectionViewCell.swift; sourceTree = "<group>"; };
 		83B1E22A2C861EA500B9BEDC /* baseecolife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseecolife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,8 +115,10 @@
 		83B1E2362C861EA700B9BEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83B1E2392C861EA700B9BEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83B1E23B2C861EA700B9BEDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83D854282CD5575B003361BE /* InputFormularioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormularioCollectionViewCell.swift; sourceTree = "<group>"; };
+		83D8542A2CD56241003361BE /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentosFormsViewController.swift; sourceTree = "<group>"; };
-		83DA94F72CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentosCollectionViewCell.swift; sourceTree = "<group>"; };
+		83F1F6772CE7C7DD00B8C236 /* DatabaseEco.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DatabaseEco.sqlite3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				835578362CE43EBE00802EFD /* DGCharts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,14 +136,26 @@
 		830E6D502CBD8C3E00D0299A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				835578292CE439D400802EFD /* Charts.xcodeproj */,
 				830E6D512CBD8C3F00D0299A /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8355782C2CE439D400802EFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				835578312CE439D400802EFD /* DGCharts.framework */,
+				835578332CE439D400802EFD /* DGChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		83B1E2212C861EA500B9BEDC = {
 			isa = PBXGroup;
 			children = (
+				838769E62CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift */,
+				83305FB82CD420A2007582FD /* FormsTranspViewController.swift */,
 				830E6D522CBD8E0800D0299A /* FMDatabase.h */,
 				830E6D532CBD8E0800D0299A /* FMDatabase.m */,
 				830E6D542CBD8E0800D0299A /* FMDatabaseAdditions.h */,
@@ -131,22 +192,27 @@
 		83B1E22C2C861EA500B9BEDC /* baseecolife */ = {
 			isa = PBXGroup;
 			children = (
-				83B0E21C2CC194960067053E /* pruebas.sqlite */,
 				83A4D4E32CA5CBBD0026B3C4 /* CalculatorViewController.swift */,
 				83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */,
 				83B1E22F2C861EA500B9BEDC /* SceneDelegate.swift */,
 				83B1E2312C861EA500B9BEDC /* ViewController.swift */,
 				83B1E2332C861EA500B9BEDC /* Main.storyboard */,
-				838F6DCF2CC312D900F050DB /* FormsDeseViewController.swift */,
+				83D8542A2CD56241003361BE /* DataPoint.swift */,
+				83D854282CD5575B003361BE /* InputFormularioCollectionViewCell.swift */,
+				838769E82CE595C800BA7639 /* inputFormularioDesechosCollectionViewCell.swift */,
 				838F6DCD2CC3119900F050DB /* DesechosCollectionViewCell.swift */,
-				83DA94F72CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift */,
 				83B0E24E2CC1A8340067053E /* FactoresCollectionViewCell.swift */,
+				838769E42CE58CA000BA7639 /* AlimentosCollectionViewCell.swift */,
 				83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */,
 				838D2E012CD02A66008199D8 /* LugaresViewController.swift */,
+				83594C462CD1975600A68CE1 /* LugaresCollectionViewCell.swift */,
 				830E6D682CBD9E4800D0299A /* TestViewController.swift */,
+				838769EC2CE5986F00BA7639 /* FormsDeseViewController.swift */,
+				83305FB42CD40A2D007582FD /* juegoViewController.swift */,
 				83B1E2362C861EA700B9BEDC /* Assets.xcassets */,
 				83B1E2382C861EA700B9BEDC /* LaunchScreen.storyboard */,
 				83B1E23B2C861EA700B9BEDC /* Info.plist */,
+				83F1F6772CE7C7DD00B8C236 /* DatabaseEco.sqlite3 */,
 			);
 			path = baseecolife;
 			sourceTree = "<group>";
@@ -161,6 +227,7 @@
 				83B1E2262C861EA500B9BEDC /* Sources */,
 				83B1E2272C861EA500B9BEDC /* Frameworks */,
 				83B1E2282C861EA500B9BEDC /* Resources */,
+				835578382CE43EBE00802EFD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,12 +265,35 @@
 			mainGroup = 83B1E2212C861EA500B9BEDC;
 			productRefGroup = 83B1E22B2C861EA500B9BEDC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8355782C2CE439D400802EFD /* Products */;
+					ProjectRef = 835578292CE439D400802EFD /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				83B1E2292C861EA500B9BEDC /* baseecolife */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		835578312CE439D400802EFD /* DGCharts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DGCharts.framework;
+			remoteRef = 835578302CE439D400802EFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		835578332CE439D400802EFD /* DGChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DGChartsTests.xctest;
+			remoteRef = 835578322CE439D400802EFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		83B1E2282C861EA500B9BEDC /* Resources */ = {
@@ -212,8 +302,8 @@
 			files = (
 				83B1E2372C861EA700B9BEDC /* Assets.xcassets in Resources */,
 				83B1E23A2C861EA700B9BEDC /* Base in Resources */,
+				83F1F6782CE7C7DD00B8C236 /* DatabaseEco.sqlite3 in Resources */,
 				830E6D632CBD8E0800D0299A /* info-xrOS.plist in Resources */,
-				83B0E21D2CC194960067053E /* pruebas.sqlite in Resources */,
 				83B1E2352C861EA500B9BEDC /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,23 +316,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				83B1E2322C861EA500B9BEDC /* ViewController.swift in Sources */,
+				83D854292CD5575B003361BE /* InputFormularioCollectionViewCell.swift in Sources */,
 				830E6D4F2CBD8C1D00D0299A /* ConnectionFile.m in Sources */,
+				83305FB92CD420A2007582FD /* FormsTranspViewController.swift in Sources */,
 				830E6D5E2CBD8E0800D0299A /* FMResultSet.m in Sources */,
 				830E6D5F2CBD8E0800D0299A /* FMDatabaseAdditions.m in Sources */,
+				83D8542B2CD56241003361BE /* DataPoint.swift in Sources */,
 				83DA94F62CCD577E003ECE5F /* AlimentosFormsViewController.swift in Sources */,
 				830E6D652CBD8EB600D0299A /* EcoApp.swift in Sources */,
+				838769E72CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift in Sources */,
 				830E6D692CBD9E4800D0299A /* TestViewController.swift in Sources */,
 				838F6DCE2CC3119900F050DB /* DesechosCollectionViewCell.swift in Sources */,
 				830E6D672CBD8F1600D0299A /* ModelManager.swift in Sources */,
-				83DA94F82CCD57AA003ECE5F /* AlimentosCollectionViewCell.swift in Sources */,
+				83305FB52CD40A2D007582FD /* juegoViewController.swift in Sources */,
 				830E6D602CBD8E0800D0299A /* FMDatabaseQueue.m in Sources */,
 				830E6D612CBD8E0800D0299A /* FMDatabase.m in Sources */,
 				830E6D622CBD8E0800D0299A /* FMDatabasePool.m in Sources */,
 				83B1E22E2C861EA500B9BEDC /* AppDelegate.swift in Sources */,
 				83A4D4E42CA5CBC40026B3C4 /* CalculatorViewController.swift in Sources */,
+				838769ED2CE5986F00BA7639 /* FormsDeseViewController.swift in Sources */,
+				838769E92CE595C800BA7639 /* inputFormularioDesechosCollectionViewCell.swift in Sources */,
 				83B0E24F2CC1A8340067053E /* FactoresCollectionViewCell.swift in Sources */,
+				83594C472CD1975600A68CE1 /* LugaresCollectionViewCell.swift in Sources */,
 				83B1E2302C861EA500B9BEDC /* SceneDelegate.swift in Sources */,
-				838F6DD02CC312D900F050DB /* FormsDeseViewController.swift in Sources */,
+				838769E52CE58CA000BA7639 /* AlimentosCollectionViewCell.swift in Sources */,
 				838D2E022CD02A66008199D8 /* LugaresViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

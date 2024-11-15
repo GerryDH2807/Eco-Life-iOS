@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct graficaPrueba{
+    var day: String
+    var hours: Int
+}
