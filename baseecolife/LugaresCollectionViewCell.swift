@@ -14,4 +14,14 @@ class LugaresCollectionViewCell:UICollectionViewCell{
     @IBOutlet weak var ubicacionLabel: UILabel!
     @IBOutlet weak var diasLabel: UILabel!
     @IBOutlet weak var horarioLabel: UILabel!
+    
+    
+    @IBOutlet weak var imagenLugares: UIImageView!
+    
+    override func awakeFromNib() {
+            super.awakeFromNib()
+            
+            // Configuración inicial de la imagen, si es necesario
+            imagenLugares.layer.masksToBounds = true // Asegura que el cornerRadius se aplique correctamente
+        }
 }
