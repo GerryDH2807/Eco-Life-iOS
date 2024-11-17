@@ -28,6 +28,10 @@ class CalculatorViewController: UIViewController {
             self?.update()
         }
         
+        NotificationCenter.default.addObserver(forName: Notification.Name("EmisionesEnerAdded"), object: nil, queue: .main) { [weak self] _ in
+            self?.update()
+        }
+        
         update()
         updateChartData()
     }

@@ -166,6 +166,24 @@ class ModelManager: NSObject {
         return isInserted
     }
     
+    func addEmisionEner(emisionUsuarioEner: Float, fechaCarga: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let fechaActual = Date()
+        let fechaFormateada = dateFormatter.string(from: fechaActual)
+        
+        print("Intentando updatear historial energia con valores: \(emisionUsuarioEner), \(fechaCarga)")
+        
+        sharedInstance.database!.open()
+        let isInserted = sharedInstance.database!.executeUpdate(
+            "UPDATE Historial SET TotalEnergia = ? WHERE Fecha = ?",
+            withArgumentsIn: [emisionUsuarioEner, fechaFormateada]
+        )
+        
+        sharedInstance.database!.close()
+        return isInserted
+    }
+    
     func addFactorTransporte(nombre: String) -> Bool {
         sharedInstance.database!.open()
         let tipoFact = 4 // Tipo fijo para los factores creados
@@ -272,5 +290,25 @@ class ModelManager: NSObject {
         
         sharedInstance.database!.close()
         return isUpdated
+    }
+    
+    func historialCada12() -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let fechaActual = Date()
+        let fechaFormateada = dateFormatter.string(from: fechaActual)
+        
+        sharedInstance.database!.open()
+        
+        // Usamos executeUpdate para una inserción, no executeQuery
+        let querySuccess = sharedInstance.database!.executeUpdate(
+            "INSERT INTO Historial (Fecha, TotalDesecho, TotalEnergia, TotalAlimento, TotalTransporte) VALUES (? , NULL, NULL, NULL, NULL)",
+            withArgumentsIn: [fechaFormateada]
+        )
+        
+        sharedInstance.database!.close()
+        
+        // Retornamos el resultado de executeUpdate como un booleano
+        return querySuccess // Este es un booleano
     }
 }

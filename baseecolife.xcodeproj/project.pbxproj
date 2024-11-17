@@ -21,6 +21,8 @@
 		83305FB92CD420A2007582FD /* FormsTranspViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83305FB82CD420A2007582FD /* FormsTranspViewController.swift */; };
 		835578362CE43EBE00802EFD /* DGCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835578312CE439D400802EFD /* DGCharts.framework */; };
 		835578372CE43EBE00802EFD /* DGCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 835578312CE439D400802EFD /* DGCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83567E562CE94EEA008C70CB /* EnergiaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83567E552CE94EEA008C70CB /* EnergiaViewController.swift */; };
+		83567E582CE96B0F008C70CB /* DatabaseEco.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 83567E572CE96B0F008C70CB /* DatabaseEco.sqlite3 */; };
 		83594C472CD1975600A68CE1 /* LugaresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83594C462CD1975600A68CE1 /* LugaresCollectionViewCell.swift */; };
 		838769E52CE58CA000BA7639 /* AlimentosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838769E42CE58CA000BA7639 /* AlimentosCollectionViewCell.swift */; };
 		838769E72CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838769E62CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift */; };
@@ -39,7 +41,6 @@
 		83D854292CD5575B003361BE /* InputFormularioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D854282CD5575B003361BE /* InputFormularioCollectionViewCell.swift */; };
 		83D8542B2CD56241003361BE /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8542A2CD56241003361BE /* DataPoint.swift */; };
 		83DA94F62CCD577E003ECE5F /* AlimentosFormsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */; };
-		83F1F6782CE7C7DD00B8C236 /* DatabaseEco.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 83F1F6772CE7C7DD00B8C236 /* DatabaseEco.sqlite3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,8 @@
 		83305FB42CD40A2D007582FD /* juegoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = juegoViewController.swift; sourceTree = "<group>"; };
 		83305FB82CD420A2007582FD /* FormsTranspViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsTranspViewController.swift; sourceTree = "<group>"; };
 		835578292CE439D400802EFD /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "/Users/Administrador/Desktop/Charts-master/Charts.xcodeproj"; sourceTree = "<absolute>"; };
+		83567E552CE94EEA008C70CB /* EnergiaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergiaViewController.swift; sourceTree = "<group>"; };
+		83567E572CE96B0F008C70CB /* DatabaseEco.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DatabaseEco.sqlite3; sourceTree = "<group>"; };
 		83594C3A2CD1925300A68CE1 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
 		83594C3C2CD1925300A68CE1 /* FMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		83594C3D2CD1925300A68CE1 /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
@@ -118,7 +121,6 @@
 		83D854282CD5575B003361BE /* InputFormularioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormularioCollectionViewCell.swift; sourceTree = "<group>"; };
 		83D8542A2CD56241003361BE /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlimentosFormsViewController.swift; sourceTree = "<group>"; };
-		83F1F6772CE7C7DD00B8C236 /* DatabaseEco.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = DatabaseEco.sqlite3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				83B1E22D2C861EA500B9BEDC /* AppDelegate.swift */,
 				83B1E22F2C861EA500B9BEDC /* SceneDelegate.swift */,
 				83B1E2312C861EA500B9BEDC /* ViewController.swift */,
+				83567E552CE94EEA008C70CB /* EnergiaViewController.swift */,
 				83B1E2332C861EA500B9BEDC /* Main.storyboard */,
 				83D8542A2CD56241003361BE /* DataPoint.swift */,
 				83D854282CD5575B003361BE /* InputFormularioCollectionViewCell.swift */,
@@ -212,7 +215,7 @@
 				83B1E2362C861EA700B9BEDC /* Assets.xcassets */,
 				83B1E2382C861EA700B9BEDC /* LaunchScreen.storyboard */,
 				83B1E23B2C861EA700B9BEDC /* Info.plist */,
-				83F1F6772CE7C7DD00B8C236 /* DatabaseEco.sqlite3 */,
+				83567E572CE96B0F008C70CB /* DatabaseEco.sqlite3 */,
 			);
 			path = baseecolife;
 			sourceTree = "<group>";
@@ -302,7 +305,7 @@
 			files = (
 				83B1E2372C861EA700B9BEDC /* Assets.xcassets in Resources */,
 				83B1E23A2C861EA700B9BEDC /* Base in Resources */,
-				83F1F6782CE7C7DD00B8C236 /* DatabaseEco.sqlite3 in Resources */,
+				83567E582CE96B0F008C70CB /* DatabaseEco.sqlite3 in Resources */,
 				830E6D632CBD8E0800D0299A /* info-xrOS.plist in Resources */,
 				83B1E2352C861EA500B9BEDC /* Base in Resources */,
 			);
@@ -317,6 +320,7 @@
 			files = (
 				83B1E2322C861EA500B9BEDC /* ViewController.swift in Sources */,
 				83D854292CD5575B003361BE /* InputFormularioCollectionViewCell.swift in Sources */,
+				83567E562CE94EEA008C70CB /* EnergiaViewController.swift in Sources */,
 				830E6D4F2CBD8C1D00D0299A /* ConnectionFile.m in Sources */,
 				83305FB92CD420A2007582FD /* FormsTranspViewController.swift in Sources */,
 				830E6D5E2CBD8E0800D0299A /* FMResultSet.m in Sources */,
