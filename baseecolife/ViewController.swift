@@ -68,13 +68,13 @@ class ViewController: UIViewController {
     }
 
     // Arreglos para almacenar los títulos y descripciones
-    let titulos = ["Título 1", "Título 2", "Título 3", "Título 4", "Título 5"]
+    let titulos = ["Reto 1", "Reto 2", "Reto 3", "Reto 4", "Reto 5"]
     let descripciones = [
-        "Descripción del reto 1.",
-        "Descripción del reto 2.",
-        "Descripción del reto 3.",
-        "Descripción del reto 4.",
-        "Descripción del reto 5."
+        "En la noche desconecta tus dispostivos.",
+        "Si tu y algún familiar o amigo van a destinor cercanos, irse juntos.",
+        "Usar rastrillos de metal.",
+        "Clasificar la basura de tu casa.",
+        "Asegurate que las llaves de agua esten cerradas."
     ]
     
     let diccionariotest: [String: Int] = [

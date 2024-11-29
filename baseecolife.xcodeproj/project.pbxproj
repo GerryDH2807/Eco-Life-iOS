@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1251141A2CF4212E00D1618A /* DGCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 125114172CF420C500D1618A /* DGCharts.framework */; };
+		1251141B2CF4212E00D1618A /* DGCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 125114172CF420C500D1618A /* DGCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		125114262CF423F000D1618A /* ScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125114252CF423F000D1618A /* ScrollingViewController.swift */; };
+		125114282CF46EDB00D1618A /* MusicRoads.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 125114272CF46EDB00D1618A /* MusicRoads.m4a */; };
+		1251142C2CF4785100D1618A /* StepRoad.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1251142B2CF4785100D1618A /* StepRoad.mp3 */; };
+		1251142E2CF4811D00D1618A /* popsound1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 1251142D2CF4811D00D1618A /* popsound1.m4a */; };
+		125114302CF4858200D1618A /* streets.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1251142F2CF4858200D1618A /* streets.mp3 */; };
+		125114322CF4884100D1618A /* popais.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125114312CF4884100D1618A /* popais.mp3 */; };
+		125114352CF4A64900D1618A /* basurini.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125114332CF4A64900D1618A /* basurini.mp3 */; };
+		125114362CF4A64900D1618A /* electro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 125114342CF4A64900D1618A /* electro.mp3 */; };
+		125114382CF4B40800D1618A /* File.txt in Resources */ = {isa = PBXBuildFile; fileRef = 125114372CF4B40700D1618A /* File.txt */; };
 		830E6D4F2CBD8C1D00D0299A /* ConnectionFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D4E2CBD8C1D00D0299A /* ConnectionFile.m */; };
 		830E6D5E2CBD8E0800D0299A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D5C2CBD8E0800D0299A /* FMResultSet.m */; };
 		830E6D5F2CBD8E0800D0299A /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D552CBD8E0800D0299A /* FMDatabaseAdditions.m */; };
@@ -19,8 +30,6 @@
 		830E6D692CBD9E4800D0299A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830E6D682CBD9E4800D0299A /* TestViewController.swift */; };
 		83305FB52CD40A2D007582FD /* juegoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83305FB42CD40A2D007582FD /* juegoViewController.swift */; };
 		83305FB92CD420A2007582FD /* FormsTranspViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83305FB82CD420A2007582FD /* FormsTranspViewController.swift */; };
-		835578362CE43EBE00802EFD /* DGCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 835578312CE439D400802EFD /* DGCharts.framework */; };
-		835578372CE43EBE00802EFD /* DGCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 835578312CE439D400802EFD /* DGCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83567E562CE94EEA008C70CB /* EnergiaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83567E552CE94EEA008C70CB /* EnergiaViewController.swift */; };
 		83567E582CE96B0F008C70CB /* DatabaseEco.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 83567E572CE96B0F008C70CB /* DatabaseEco.sqlite3 */; };
 		83594C472CD1975600A68CE1 /* LugaresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83594C462CD1975600A68CE1 /* LugaresCollectionViewCell.swift */; };
@@ -44,6 +53,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		125114162CF420C500D1618A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 125114112CF420C500D1618A /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = DGCharts;
+		};
+		125114182CF420C500D1618A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 125114112CF420C500D1618A /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = DGChartsTests;
+		};
 		835578302CE439D400802EFD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 835578292CE439D400802EFD /* Charts.xcodeproj */;
@@ -61,13 +84,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		835578382CE43EBE00802EFD /* Embed Frameworks */ = {
+		1251141C2CF4212E00D1618A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				835578372CE43EBE00802EFD /* DGCharts.framework in Embed Frameworks */,
+				1251141B2CF4212E00D1618A /* DGCharts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +98,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		125114112CF420C500D1618A /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../Desktop/Charts-master 2/Charts.xcodeproj"; sourceTree = "<group>"; };
+		125114252CF423F000D1618A /* ScrollingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingViewController.swift; sourceTree = "<group>"; };
+		125114272CF46EDB00D1618A /* MusicRoads.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = MusicRoads.m4a; sourceTree = "<group>"; };
+		1251142B2CF4785100D1618A /* StepRoad.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StepRoad.mp3; sourceTree = "<group>"; };
+		1251142D2CF4811D00D1618A /* popsound1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = popsound1.m4a; sourceTree = "<group>"; };
+		1251142F2CF4858200D1618A /* streets.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = streets.mp3; sourceTree = "<group>"; };
+		125114312CF4884100D1618A /* popais.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = popais.mp3; sourceTree = "<group>"; };
+		125114332CF4A64900D1618A /* basurini.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = basurini.mp3; sourceTree = "<group>"; };
+		125114342CF4A64900D1618A /* electro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = electro.mp3; sourceTree = "<group>"; };
+		125114372CF4B40700D1618A /* File.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.txt; sourceTree = "<group>"; };
 		830E6D4D2CBD8C1D00D0299A /* baseecolife-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "baseecolife-Bridging-Header.h"; sourceTree = "<group>"; };
 		830E6D4E2CBD8C1D00D0299A /* ConnectionFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConnectionFile.m; sourceTree = "<group>"; };
 		830E6D512CBD8C3F00D0299A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -128,17 +161,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				835578362CE43EBE00802EFD /* DGCharts.framework in Frameworks */,
+				1251141A2CF4212E00D1618A /* DGCharts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		125114122CF420C500D1618A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				125114172CF420C500D1618A /* DGCharts.framework */,
+				125114192CF420C500D1618A /* DGChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		830E6D502CBD8C3E00D0299A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				835578292CE439D400802EFD /* Charts.xcodeproj */,
+				125114112CF420C500D1618A /* Charts.xcodeproj */,
 				830E6D512CBD8C3F00D0299A /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
@@ -209,6 +252,13 @@
 				83DA94F52CCD577E003ECE5F /* AlimentosFormsViewController.swift */,
 				838D2E012CD02A66008199D8 /* LugaresViewController.swift */,
 				83594C462CD1975600A68CE1 /* LugaresCollectionViewCell.swift */,
+				1251142B2CF4785100D1618A /* StepRoad.mp3 */,
+				1251142D2CF4811D00D1618A /* popsound1.m4a */,
+				125114332CF4A64900D1618A /* basurini.mp3 */,
+				125114342CF4A64900D1618A /* electro.mp3 */,
+				125114272CF46EDB00D1618A /* MusicRoads.m4a */,
+				125114312CF4884100D1618A /* popais.mp3 */,
+				1251142F2CF4858200D1618A /* streets.mp3 */,
 				830E6D682CBD9E4800D0299A /* TestViewController.swift */,
 				838769EC2CE5986F00BA7639 /* FormsDeseViewController.swift */,
 				83305FB42CD40A2D007582FD /* juegoViewController.swift */,
@@ -216,6 +266,8 @@
 				83B1E2382C861EA700B9BEDC /* LaunchScreen.storyboard */,
 				83B1E23B2C861EA700B9BEDC /* Info.plist */,
 				83567E572CE96B0F008C70CB /* DatabaseEco.sqlite3 */,
+				125114252CF423F000D1618A /* ScrollingViewController.swift */,
+				125114372CF4B40700D1618A /* File.txt */,
 			);
 			path = baseecolife;
 			sourceTree = "<group>";
@@ -230,7 +282,7 @@
 				83B1E2262C861EA500B9BEDC /* Sources */,
 				83B1E2272C861EA500B9BEDC /* Frameworks */,
 				83B1E2282C861EA500B9BEDC /* Resources */,
-				835578382CE43EBE00802EFD /* Embed Frameworks */,
+				1251141C2CF4212E00D1618A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +322,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 125114122CF420C500D1618A /* Products */;
+					ProjectRef = 125114112CF420C500D1618A /* Charts.xcodeproj */;
+				},
+				{
 					ProductGroup = 8355782C2CE439D400802EFD /* Products */;
 					ProjectRef = 835578292CE439D400802EFD /* Charts.xcodeproj */;
 				},
@@ -282,6 +338,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		125114172CF420C500D1618A /* DGCharts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DGCharts.framework;
+			remoteRef = 125114162CF420C500D1618A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		125114192CF420C500D1618A /* DGChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DGChartsTests.xctest;
+			remoteRef = 125114182CF420C500D1618A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		835578312CE439D400802EFD /* DGCharts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -303,11 +373,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1251142C2CF4785100D1618A /* StepRoad.mp3 in Resources */,
+				125114382CF4B40800D1618A /* File.txt in Resources */,
+				125114282CF46EDB00D1618A /* MusicRoads.m4a in Resources */,
 				83B1E2372C861EA700B9BEDC /* Assets.xcassets in Resources */,
+				125114302CF4858200D1618A /* streets.mp3 in Resources */,
 				83B1E23A2C861EA700B9BEDC /* Base in Resources */,
 				83567E582CE96B0F008C70CB /* DatabaseEco.sqlite3 in Resources */,
+				125114322CF4884100D1618A /* popais.mp3 in Resources */,
 				830E6D632CBD8E0800D0299A /* info-xrOS.plist in Resources */,
+				1251142E2CF4811D00D1618A /* popsound1.m4a in Resources */,
 				83B1E2352C861EA500B9BEDC /* Base in Resources */,
+				125114352CF4A64900D1618A /* basurini.mp3 in Resources */,
+				125114362CF4A64900D1618A /* electro.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +408,7 @@
 				830E6D652CBD8EB600D0299A /* EcoApp.swift in Sources */,
 				838769E72CE58ED900BA7639 /* InputFormularioAlimentoCollectionViewCell.swift in Sources */,
 				830E6D692CBD9E4800D0299A /* TestViewController.swift in Sources */,
+				125114262CF423F000D1618A /* ScrollingViewController.swift in Sources */,
 				838F6DCE2CC3119900F050DB /* DesechosCollectionViewCell.swift in Sources */,
 				830E6D672CBD8F1600D0299A /* ModelManager.swift in Sources */,
 				83305FB52CD40A2D007582FD /* juegoViewController.swift in Sources */,

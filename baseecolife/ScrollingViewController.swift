@@ -1,4 +1,159 @@
 import UIKit
+import AVFoundation //Eliminar si musica no funciona (KEYMUS1)
+
+
+//Eliminar si musica no funciona (KEYMUS2)
+//KEYMUS2
+class AudioManager {
+    static let shared = AudioManager()
+    private var audioPlayer: AVAudioPlayer?
+
+    private init() {}
+
+
+    func playBackgroundMusic() {
+        if let musicPath = Bundle.main.path(forResource: "MusicRoads", ofType: "m4a") {
+            let musicURL = URL(fileURLWithPath: musicPath)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: musicURL)
+                audioPlayer?.numberOfLoops = -1 // Repetir indefinidamente
+                audioPlayer?.play()
+            } catch {
+                print("Error al reproducir música de fondo: \(error.localizedDescription)")
+            }
+        } else {
+            print("No se encontró el archivo de música.")
+        }
+    }
+
+
+    func stopBackgroundMusic() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+        print("Música de fondo detenida.")
+    }
+
+    func pauseBackgroundMusic() {
+        audioPlayer?.pause()
+    }
+
+    func resumeBackgroundMusic() {
+        audioPlayer?.play()
+    }
+    
+    //Walking sound
+    //Walking
+    var walkingSoundPlayer: AVAudioPlayer?
+
+    func playWalkingSound() {
+        guard let soundURL = Bundle.main.url(forResource: "StepRoad", withExtension: "mp3") else {
+            print("Error en el archivo de audio")
+            return
+        }
+        do {
+            walkingSoundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            walkingSoundPlayer?.numberOfLoops = -1 // Repetir indefinidamente mientras el botón está presionado
+            walkingSoundPlayer?.play()
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+
+    func stopWalkingSound() {
+        walkingSoundPlayer?.stop()
+        walkingSoundPlayer = nil
+    }
+    
+    //POP Sound
+    //POP SOUND
+    
+    //POP sound para las BASURAS
+    var popSoundPlayer: AVAudioPlayer?
+
+    func playPopSound() {
+        guard let soundURL = Bundle.main.url(forResource: "popais", withExtension: "mp3") else {
+            print("No esta el MP3.")
+            return
+        }
+        do {
+            popSoundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            popSoundPlayer?.play() // Reproducir el sonido una vez
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    // Streets ambiente
+    var StreetPlayer: AVAudioPlayer?
+
+    func playStreets() {
+        if let musicPath = Bundle.main.path(forResource: "streets", ofType: "mp3") {
+            let musicURL = URL(fileURLWithPath: musicPath)
+            do {
+                StreetPlayer = try AVAudioPlayer(contentsOf: musicURL)
+                StreetPlayer?.numberOfLoops = -1 // Repetir indefinidamente
+                StreetPlayer?.volume = 0.05
+                StreetPlayer?.play()
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
+        } else {
+            print("Archivo inexistente.")
+        }
+    }
+
+
+
+    func stopStreet() {
+        StreetPlayer?.stop()
+        StreetPlayer = nil
+    }
+    
+    //Depositar basura sonidukis
+    
+    //POP sound para las BASURAS
+    var DepositSoundPlayer: AVAudioPlayer?
+
+    func playDepositSound() {
+        guard let soundURL = Bundle.main.url(forResource: "basurini", withExtension: "mp3") else {
+            print("No se encuentr el arhcivo")
+            return
+        }
+        do {
+            DepositSoundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            DepositSoundPlayer?.play() // Reproducir el sonido una vez
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    //Recargar con panel sonido
+    //POP sound para las BASURAS
+    var PanelSoundPlayer: AVAudioPlayer?
+
+    func playPanelSound() {
+        guard let soundURL = Bundle.main.url(forResource: "electro", withExtension: "mp3") else {
+            print("No se encontro el archivo.")
+            return
+        }
+        do {
+            PanelSoundPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            PanelSoundPlayer?.play() // Reproducir el sonido una vez
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    
+    
+    
+}
+
+
+//KEYMUS2 end
+
 
 class ScrollingViewController: UIViewController {
     
@@ -24,12 +179,12 @@ class ScrollingViewController: UIViewController {
     var cursorImageView: UIImageView?
     
     
-    var scrollView: UIScrollView! //var scrollview
+    var scrollView: UIScrollView! //var scrollview main
     
     //var scrollView: UIView!
     var movingRectangle: UIImageView! //Variable del jugador
     
-    var casillasLimiteX: Int = 12 // a partir de 13 ya hay scroll //limite de casillas en x para que no sea iniftnito
+    var casillasLimiteX: Int = 13 // a partir de 13 (12 good) ya hay scroll //limite de casillas en x para que no sea iniftnito
     // limite de desplazamiento en X por caslla
     var scrollLimitX: CGFloat {
         return CGFloat(casillasLimiteX) * floorImages.first!.size.width
@@ -42,14 +197,14 @@ class ScrollingViewController: UIViewController {
     var direction: CGPoint = .zero //Direccion del movimiento
     var spriteIndex: Int = 0 //indice actual del sprite
     var currentDirectionSprites: [UIImage] = [] //Imagenes del sprite para la direccion actual
-    //var staticImages: [UIImageView] = [] //Array de almacenamiento imagenes estaticas
     var borderImages: [UIImageView] = [] //Array de almacenamiento bordes
     var coinLabel: UILabel! //Etiqueta para mostrar las monedas recogidas (basuras)
     
     //Array de imagenes del sprite para cada direccion
     let upSprites: [UIImage] = [
-        UIImage(named: "sprite_up_1")!,
-        UIImage(named: "sprite_up_2")!
+        UIImage(named: "up1")!,
+        UIImage(named: "up2")!,
+        UIImage(named: "up3")!
     ]
     
     let downSprites: [UIImage] = [
@@ -58,21 +213,23 @@ class ScrollingViewController: UIViewController {
     ]
     
     let leftSprites: [UIImage] = [
-        UIImage(named: "sprite_left_1")!,
-        UIImage(named: "sprite_left_2")!
+        UIImage(named: "side1izq")!,
+        UIImage(named: "side2izq")!,
+        UIImage(named: "side3izq")!
     ]
     
     let rightSprites: [UIImage] = [
-        UIImage(named: "sprite_right_1")!,
-        UIImage(named: "sprite_right_2")!
+        UIImage(named: "side1")!,
+        UIImage(named: "side2")!,
+        UIImage(named: "side3")!
     ]
     
     //sprites zona deposito (basuras)
     let depositZoneSprites: [UIImage] = [
-        UIImage(named: "can1")!
+        UIImage(named: "basuracont")!
     ]
     
-    var depositZoneSpriteSpeed: TimeInterval = 0.5 //Velocidad de cambio de sprite para la zona donde se depositan las mondedas/basura
+    var depositZoneSpriteSpeed: TimeInterval = 0.5 //Velocidad de cambio de sprite para la zona donde se depositan las basuras
     var depositZoneSpriteIndex: Int = 0 //indice actual del sprite para la zona de deposito
     
     
@@ -90,30 +247,36 @@ class ScrollingViewController: UIViewController {
     func setupGame(){
         //primera vista
         
-        
-        
-        self.view.backgroundColor = .green
+        let NiceColor = UIColor(red: 166/255, green: 195/255, blue: 78/255, alpha: 1.0)
+
+        //fondo
+        self.view.backgroundColor = NiceColor
+
         
         //vista de desplazamiento
         
         
         setupScrollView()
         
-        //movimineto del jugador
+        //jugador en el mapa
         setupMovingRectangle()
         
+        // Iniciar efectos sonors
+        AudioManager.shared.playStreets()
+        AudioManager.shared.playBackgroundMusic()
         
-        generateRoadSections()
-        setupCars()
-
+        //Estos dos destrozan el rendimiento, give a look
+        //generateRoadSections()
+        //setupCars()
         
+        //Interfazes
         setupGameUI()
         //startEnergyTimer()
         
-        //setupDebugButton()
+        //DebugButton()
         
         //stopAllTimers()
-        stopLeafFallAnimation() // Asegúrate de limpiar las hojas previas
+        stopLeafFallAnimation() //sstop hojas
         startLeafFallAnimation() // Reinicia la animación de hojas
         
         //startCarMovement()
@@ -133,7 +296,7 @@ class ScrollingViewController: UIViewController {
         setupControlButtons()
         
         //Configuracion del boton para regenerar monedas (Dev testing)
-        setupRegenerateCoinsButton()
+        //setupRegenerateCoinsButton()
         
         //Sistema de deposito
         setupCollectedCoinsLabel()
@@ -157,7 +320,7 @@ class ScrollingViewController: UIViewController {
         //Pasto poner
         //placeGrass()
         
-        setupAnimals()
+        //setupAnimals() No perrito :(
         //setupFollower()
         
         //Objetos
@@ -168,18 +331,28 @@ class ScrollingViewController: UIViewController {
         //setupStoreButton()
         
         //Inventory
-        setupInventoryButton()
+       // setupInventoryButton() No inventario for the project
         
         //PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD  PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD
         //PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD  PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD
         setupCubes() // Configurar los cubos inicialmente
-        Timer.scheduledTimer(timeInterval: 0.016, target: self, selector: #selector(updateCubes), userInfo: nil, repeats: true) // Actualizar cubos
-
+        
+        // Verifica si el Timer ya está activo
+        if movementTimer == nil {
+            movementTimer = Timer.scheduledTimer(timeInterval: 0.016, target: self, selector: #selector(updateCubes), userInfo: nil, repeats: true)
+            print("Timer iniciado")
+        } else {
+            print("Timer activo")
+        }
+        
+        //Timer.scheduledTimer(timeInterval: 0.016, target: self, selector: #selector(updateCubes), //userInfo: nil, repeats: true) // Actualizar cubos
+        
         
         //PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD  PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD
         //PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD  PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD PRUEBA VIEWDIDLOAD
         
         
+        //NO se usara
         //Añadir un gesto para colocar objetos en el mapa
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(colocarObjeto(_:)))
         scrollView.addGestureRecognizer(tapGesture)
@@ -187,8 +360,8 @@ class ScrollingViewController: UIViewController {
     }
     
     
- 
-   
+    
+    
     
     
     
@@ -205,17 +378,31 @@ class ScrollingViewController: UIViewController {
     
     //Booleano que nos sirve si queremos ejercutar acciones en donde el jugador este en
     //el piso en vez de las carreteras
+    /*
+     func isPlayerOnGrass() -> Bool {
+     for subview in containerView.subviews {
+     if let imageView = subview as? UIImageView,
+     imageView.frame.contains(movingRectangle.frame.origin),
+     imageView.image?.accessibilityIdentifier == "grass" {
+     return true
+     }
+     }
+     return false
+     }
+     */
+    
     func isPlayerOnGrass() -> Bool {
-        for subview in containerView.subviews {
-            if let imageView = subview as? UIImageView,
-               imageView.frame.contains(movingRectangle.frame.origin),
-               imageView.image?.accessibilityIdentifier == "grass" {
+        for i in containerView.subviews {
+            if let imageView = i as? UIImageView,
+               imageView.image?.accessibilityIdentifier == "grass",
+               imageView.frame.intersects(movingRectangle.frame) {
                 return true
             }
         }
         return false
     }
-
+    
+    
     
     //Imagenes de el piso, un array de varios para una vista mas detallada en los pisos al momento de jugar
     let floorImages: [UIImage] = [
@@ -250,13 +437,13 @@ class ScrollingViewController: UIViewController {
             return image
         }()
     ]
-
+    
     //carreteras
-    let roadImage = UIImage(named: "carretera")!
+    let roadCarre = UIImage(named: "carretera")!
     //var roadSections: [CGRect] = []
     
     //Añadir los tiles/casillas iniciaeles
-    func addInitialTiles() {
+    func InitialTiles() {
         let tileHeight = floorImages.first!.size.height
         let horizontalTiles = Int(scrollLimitX / tileHeight)
         var currentY: CGFloat = 0
@@ -284,7 +471,7 @@ class ScrollingViewController: UIViewController {
             for _ in 0..<roadCount {
                 if currentY >= scrollView.contentSize.height { break }
                 for i in 0..<horizontalTiles {
-                    let roadView = UIImageView(image: roadImage)
+                    let roadView = UIImageView(image: roadCarre)
                     roadView.contentMode = .scaleAspectFill
                     roadView.frame = CGRect(x: CGFloat(i) * tileHeight, y: currentY, width: tileHeight, height: tileHeight)
                     roadContainerView.addSubview(roadView)
@@ -328,7 +515,7 @@ class ScrollingViewController: UIViewController {
             for _ in 0..<roadCount {
                 if currentY >= scrollView.contentSize.height { break }
                 for i in 0..<horizontalTiles {
-                    let roadView = UIImageView(image: roadImage)
+                    let roadView = UIImageView(image: roadCarre)
                     roadView.contentMode = .scaleAspectFill
                     roadView.frame = CGRect(x: CGFloat(i) * tileWidth, y: currentY, width: tileWidth, height: tileHeight)
                     roadContainerView.addSubview(roadView)
@@ -337,44 +524,108 @@ class ScrollingViewController: UIViewController {
                 currentY += tileHeight
             }
             
-            // Generar elementos adicionales (monedas y árboles)
-            addElementsInSection(yPosition: currentY, horizontalTiles: horizontalTiles, tileWidth: tileWidth)
+            //Generar elementos adicionale
+            addElementos(yPosition: currentY, horizontalTiles: horizontalTiles, tileWidth: tileWidth)
         }
     }
     
     //Añadir elementos de arbol, (se uso otra funcion que funcionaba mejor)
-    func addElementsInSection(yPosition: CGFloat, horizontalTiles: Int, tileWidth: CGFloat) {
-
+    func addElementos(yPosition: CGFloat, horizontalTiles: Int, tileWidth: CGFloat) {
+        
         for _ in 0..<horizontalTiles {
             if Bool.random() { //arboles aleatorios
                 let randomX = CGFloat.random(in: 0...(scrollLimitX - tileWidth))
                 let randomY = CGFloat.random(in: 0...(scrollLimitY - 80)) // Usa todo el mapa
-             
-
+                
+                
                 //arbol imaes
                 let treeView = UIImageView(image: UIImage(named: ["arbol1", "arbol2", "arbol3"].randomElement()!))
                 treeView.frame = CGRect(x: randomX, y: randomY, width: 40, height: 80)
-
-                // Agregar al contenedor principal
+                
+                //contenedor principal
                 containerView.addSubview(treeView)
                 borderImages.append(treeView)
             }
         }
-
+        
     }
-
-
-
+    
+    
+    
     //Set UP del jugador, especialmente en donde comenzara
+    /*
+     func setupMovingRectangle() {
+     movingRectangle = UIImageView(frame: CGRect(x: 50, y: 11000 , width: 50, height: 50))
+     movingRectangle.image = upSprites[0] //Imagen inicial
+     scrollView.addSubview(movingRectangle)
+     }
+     */
+    
     func setupMovingRectangle() {
-        movingRectangle = UIImageView(frame: CGRect(x: 50, y: 11000 , width: 50, height: 50))
-        movingRectangle.image = upSprites[0] //Imagen inicial
+        // Configurar posicion fija inicial
+        let initialX: CGFloat = 150.0
+        let initialY: CGFloat = 11000.0
+
+        // uscar es una casilla de césped
+        if let grassTile = containerView.subviews.first(where: { subview in
+            if let imageView = subview as? UIImageView,
+               imageView.image?.accessibilityIdentifier == "grass",
+               imageView.frame.contains(CGPoint(x: initialX, y: initialY)) {
+                return true
+            }
+            return false
+        }) {
+            // grass pos
+            movingRectangle = UIImageView(frame: CGRect(x: initialX, y: initialY, width: 50, height: 50))
+        } else {
+            // Si no, busca la casilla de césped más cercana
+            if let nearestGrassTile = containerView.subviews.filter({ subview in
+                if let imageView = subview as? UIImageView,
+                   imageView.image?.accessibilityIdentifier == "grass",
+                   imageView.frame.origin.y == initialY { //Mismo nivel en y
+                    return true
+                }
+                return false
+            }).first {
+                // Usa la posicion de la casilla de grasss mas cercana
+                movingRectangle = UIImageView(frame: CGRect(x: nearestGrassTile.frame.origin.x,
+                                                            y: nearestGrassTile.frame.origin.y,
+                                                            width: 50, height: 50))
+            } else {
+                print("no hay cesped cercano, se aparecera aleatorimente")
+                movingRectangle = UIImageView(frame: CGRect(x: initialX, y: initialY, width: 50, height: 50))
+            }
+        }
+
+        // sprite inicial jugador
+        movingRectangle.image = upSprites[0]
         scrollView.addSubview(movingRectangle)
+
+        //Centrar el scrollView en el jugador
+        let halfScrollViewWidth = scrollView.bounds.width / 2
+        let halfScrollViewHeight = scrollView.bounds.height / 2
+
+        let halfRectangleWidth = movingRectangle.frame.width / 2
+        let halfRectangleHeight = movingRectangle.frame.height / 2
+
+        let maxOffsetX = scrollView.contentSize.width - scrollView.bounds.width
+        let maxOffsetY = scrollView.contentSize.height - scrollView.bounds.height
+
+        let calculatedOffsetX = initialX - halfScrollViewWidth + halfRectangleWidth
+        let calculatedOffsetY = initialY - halfScrollViewHeight + halfRectangleHeight
+
+        let offsetX = max(0, min(calculatedOffsetX, maxOffsetX))
+        let offsetY = max(0, min(calculatedOffsetY, maxOffsetY))
+
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: offsetY), animated: false)
     }
+
+    
+    
     
     //Inicia el movimiento
     func startMovement() {
-        spriteIndex = 0 // Reiniciar el índice del sprite
+        spriteIndex = 0 // Reiniciar el indice del sprite
         movementTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(movePlayer), userInfo: nil, repeats: true)
     }
     
@@ -384,92 +635,96 @@ class ScrollingViewController: UIViewController {
         case down
     }
     
-
-
+    
+    
     //TODO el movimiento del jugador y funciones que se llaman cuanto este se mueva
     //como para detectar colisiones al comparar posiciones con elementos del juego
     @objc func movePlayer() {
         let newX = movingRectangle.frame.origin.x + direction.x
         let newY = movingRectangle.frame.origin.y + direction.y
-
+        
         // Calcular nuevo marco del jugador
         let newFrame = CGRect(x: newX, y: newY, width: movingRectangle.frame.width, height: movingRectangle.frame.height)
-
-        // Verificar colisión con árboles
-        if isCollidingWithTrees(playerFrame: newFrame) {
+        
+        // Verificar colisiines con árboles
+        if TreeChoque(playerFrame: newFrame) {
             return
         }
         
-        checkCollisionWithPanels()
-
+        PanelsChoque()
+        
         //se reduce energia si el jugador se mueve (Se supone que es un robot limpiador)
         if direction.x != 0 || direction.y != 0 {
             reduceEnergy() // reduce
         }
-
+        
         //Movimiento en X dentro de los limites (No pueda seguir de mas)
         if newX >= 0 && newX <= scrollLimitX - movingRectangle.frame.width {
             movingRectangle.frame.origin.x = newX
         }
-
+        
         //Movimiento en Y dentro en limites
         movingRectangle.frame.origin.y = newY
-
+        
         //Centrar la camara en el personaje (no queremos que suba mucho y se pierda el jugador)
         let offsetX = max(0, min(newX - scrollView.bounds.width / 2 + movingRectangle.frame.width / 2, scrollView.contentSize.width - scrollView.bounds.width))
         let offsetY = max(0, min(newY - scrollView.bounds.height / 2 + movingRectangle.frame.height / 2, scrollView.contentSize.height - scrollView.bounds.height))
-
+        
         scrollView.setContentOffset(CGPoint(x: offsetX, y: offsetY), animated: false)
-
+        
         // Expandir contenido en la dirección del personaje
-        expandContentIfNeeded(forYPosition: newY)
-
+        expandContent(forYPosition: newY)
+        
         // Actualizar el sprite del personaje
         movingRectangle.image = currentDirectionSprites[spriteIndex]
         spriteIndex = (spriteIndex + 1) % currentDirectionSprites.count
-
+        
         // Detectar colisiones
-        checkForCoinCollisions()
-        checkForCarCollisions()
-        checkCollisionWithDepositZone()
+        CoinCollisions()
+        reduceCarSpeed()
+        //checkForCarCollisions()
+        CollisionTrash()
     }
-
-
+    
+    
     
     //COLISIONES COLISIONES COLISIONES COLISIONES
     //COLISIONES COLISIONES COLISIONES COLISIONES
+    
+    
     
     //Recoger monedas
-    func checkForCoinCollisions() {
+    func CoinCollisions() {
         for (index, coin) in staticImages.enumerated().reversed() {
             if movingRectangle.frame.intersects(coin.frame) {
-                if collectedCoins < collectedCoinsCapacity {
+                if collectedCoins < bolsaCapacidad {
                     coin.removeFromSuperview()
                     staticImages.remove(at: index)
                     collectedCoins += 1
-                    collectedCoinsBar.progress = Float(collectedCoins) / Float(collectedCoinsCapacity) // Actualiza la barra
+                    collectedCoinsBar.progress = Float(collectedCoins) / Float(bolsaCapacidad) // Actualiza la barra
                     
                     collectedCoinsLabel.text = "Basura recogidas: \(collectedCoins)"
                     depositedCoinsLabel.text = "Basura depositada: \(depositedCoins)"
+                    AudioManager.shared.playPopSound()
+                   // AudioManager.shared.playStreets()
                 } else {
-                    print("Se ha llenado la bolsa, deposite para continuar recolectando")
+                    print("Se ha llenado la bolsa deposite en un contenedor para continuar recolectando")
                 }
             }
         }
     }
     
     //Funcion base (estandar) de las colisiones que se usara para el juego)
-    func checkCollisionWithDepositZone() {
+    func CollisionTrash() {
         for (index, depositZone) in depositZones.enumerated() {
             if movingRectangle.frame.intersects(depositZone.frame) && collectedCoins > 0 {
                 depositedCoins += collectedCoins
                 collectedCoins = 0 // Reinicia las monedas recogidas
-                collectedCoinsBar.progress = Float(collectedCoins) / Float(collectedCoinsCapacity) // Reinicia la barra
+                collectedCoinsBar.progress = Float(collectedCoins) / Float(bolsaCapacidad) // Reinicia la barra
                 
                 collectedCoinsLabel.text = "Basura recogidas: \(collectedCoins)"
                 depositedCoinsLabel.text = "Basura depositada: \(depositedCoins)"
-                
-                print("Monedas depositadas en zona de deposito \(index)")
+                AudioManager.shared.playDepositSound()
                 break
             }
         }
@@ -481,22 +736,23 @@ class ScrollingViewController: UIViewController {
     //como en una carretera real
     
     
-    // Variable global para contar las veces que el jugador pasa por un vehículo
-    var vehiclePassCount = 0
+    // cuants veces atropellan al pobre jugador
+    var Atropello = 0
+    
     
     func checkForCarCollisions() {
         for (index, car) in cars.enumerated() {
             let startX = car.frame.origin.x
             let endX = car.frame.origin.x - 50 // Ajusta según el paso del movimiento
             let steps = 10 // Divide el movimiento en 10 pasos
-
+            
             for step in 0..<steps {
                 let interpolatedX = startX + CGFloat(step) * (endX - startX) / CGFloat(steps)
                 let interpolatedFrame = CGRect(x: interpolatedX, y: car.frame.origin.y, width: car.frame.width, height: car.frame.height)
-
+                
                 if movingRectangle.frame.intersects(interpolatedFrame) {
-                    print("Colisión detectada con coche \(index) en paso \(step)")
-                    vehiclePassCount += 1
+                    print("Colision detectada con coche \(index) en paso \(step)")
+                    Atropello += 1
                     return
                 }
             }
@@ -504,15 +760,29 @@ class ScrollingViewController: UIViewController {
     }
     
     
+    
+    /*
+     func checkForCarCollisions() {
+     for car in cars {
+     if movingRectangle.frame.intersects(car.frame) {
+     print("colision")
+     loseLife()
+     return
+     }
+     }
+     }
+     */
+    
+    
     //Funcion para poder ver las hitboxes de los elementos del juego
-    func highlightFrame(view: UIView, color: UIColor) {
+    func HitboxFrame(view: UIView, color: UIColor) {
         let border = CALayer()
         border.borderColor = color.cgColor
         border.borderWidth = 2
         border.frame = view.bounds
         view.layer.addSublayer(border)
     }
-
+    
     
     //END OF ZONA
     
@@ -524,9 +794,8 @@ class ScrollingViewController: UIViewController {
         scrollView.contentSize = CGSize(width: scrollLimitX, height: scrollLimitY * 3) // Tamaño inicial del contenido en Y el cual se expandira de forma dinamica
         
         
-        scrollView.isScrollEnabled = false // Deshabilita el desplazamiento manual (Activar para hacer test)
-        //ideal para avanzar rapido en el mapa y ver como se genera sin tener que depender de la
-        //lenta velocidad del jugador
+        scrollView.isScrollEnabled = false //Deshabilita el desplazamiento manual (Activar para hacer test)
+       //
         
         scrollView.isUserInteractionEnabled = false // Deshabilita interaccion tactil
         //para evitar trampas
@@ -542,7 +811,7 @@ class ScrollingViewController: UIViewController {
         containerView.addSubview(roadContainerView)
         containerView.addSubview(carContainerView)
         
-        addInitialTiles() // Agrega el piso y las carreteras iniciales
+        InitialTiles() // Agrega el piso y las carreteras iniciales
         scrollView.addSubview(containerView)
         self.view.addSubview(scrollView)
     }
@@ -555,124 +824,274 @@ class ScrollingViewController: UIViewController {
     //SI FUNCIONO!
     var cubes: [UIView] = [] //Array para almacenar los coches
     let cubeSize: CGFloat = 30 //Tamaño de los coches
-    let cubeSpeed: CGFloat = 36.0 //Velocidad de los coches
+    var cubeSpeed: CGFloat = 3.0 //Velocidad de los coches //20
     let numberOfCubes = 4 //coches por carretera, se podria implementar un factor random
+    var lastCollisionTime: TimeInterval = 0 // Tiempo de la última colisión
+    let collisionCooldown: TimeInterval = 1.0 // Tiempo de invulnerabilidad
+    
+    /*
+     @objc func updateCubes() {
+     let currentTime = Date().timeIntervalSince1970 // Tiempo actual
+     
+     for cube in cubes {
+     //Ignorar coches fuera del rango vertical del jugador
+     if cube.frame.midY < movingRectangle.frame.minY - 200 || cube.frame.midY > movingRectangle.frame.maxY + 200 {
+     continue
+     }
+     
+     //Mover el coche derech
+     cube.frame.origin.x += cubeSpeed
+     
+     //Si el jugador está en pasto, no pierde vidas (sistema de colisiones extraño, pero funciona)
+     if isPlayerOnGrass() {
+     continue
+     }
+     
+     //Calcular las distancias entre el cubo y el jugador
+     let distanceToPlayerX = abs(cube.frame.midX - movingRectangle.frame.midX)
+     let distanceToPlayerY = abs(cube.frame.midY - movingRectangle.frame.midY)
+     
+     // Verificar colisión precisa
+     if distanceToPlayerX <= cubeSize / 2 && distanceToPlayerY <= cubeSize / 2 {
+     // Verificar si la colisión ocurre dentro del período de cooldown
+     if currentTime - lastCollisionTime >= collisionCooldown {
+     lastCollisionTime = currentTime // Actualizar el tiempo de la última colisión
+     loseLife() // Perder una vida
+     print("Vidas restantes: \(vidas)")
+     }
+     }
+     
+     // Reiniciar posicion si el coche sale de la pantalla
+     if cube.frame.origin.x > 590 {
+     cube.frame.origin.x = -cubeSize // Reiniciar fuera de la pantalla
+     cube.backgroundColor = .red //color original si es necesario (cambia a gris al colision)
+     }
+     }
+     }
+     */
+    
+    let minimumSpeed: CGFloat = 1.0
+    
+    @objc func reduceCarSpeed() {
+         // Reduce la velocidad
+         let minimumSpeed: CGFloat = 1.0
+         if cubeSpeed > minimumSpeed {
+             cubeSpeed -= 1
+             //print("Velocidad: \(cubeSpeed)")
+         }
+     }
 
-
-    func setupCubes() {
-        cubes.forEach { $0.removeFromSuperview() } //Limpiar coches anteriores
-        cubes.removeAll()
-
-        // Configurar los coches en las carreteras
-        for roadFrame in roadSections {
-            for i in 0..<numberOfCubes {
-                let cubeX = CGFloat(i) * (cubeSize + 70) // Espaciados dinnmicos
-                let cubeY = roadFrame.minY + (roadFrame.height / 2) - (cubeSize / 2)
-
-                //Crear el coche (coche10)
-                let carImageView = UIImageView(frame: CGRect(x: cubeX, y: cubeY, width: cubeSize, height: cubeSize))
-                carImageView.image = UIImage(named: "car10") //Cargar la imagen del coche
-                carImageView.contentMode = .scaleToFill // Forzar que ocupe el tamaño completo del frame
-               // carImageView.layer.borderWidth = 1 //marco para depure
-                //carImageView.layer.borderColor = UIColor.clear.cgColor
-
-                // Añadir el coche a la vista contenedora
-                carContainerView.addSubview(carImageView)
-                cubes.append(carImageView) // Guardar la referencia en la lista de coches
-            }
-        }
-    }
-
-
-
+    
+    
     @objc func updateCubes() {
+        let currentTime = Date().timeIntervalSince1970 // Tiempo actual
+        
         for cube in cubes {
-            // Ignorar coches fuera del rango vertical del jugador
-            if cube.frame.midY < movingRectangle.frame.minY - 200 || cube.frame.midY > movingRectangle.frame.maxY + 200 {
-                continue
-            }
-
-            // Mover el coche hacia la derecha
+            // Mover el coche derechaa
             cube.frame.origin.x += cubeSpeed
-
-            // Si el jugador está en pasto, no pierde vidas (sistema de colisiones extraños, pero funciona)
-            if isPlayerOnGrass() {
+            
+            // Reiniciar posicion si el coche sale de la pantalla
+            if cube.frame.origin.x > scrollView.contentSize.width {
+                cube.frame.origin.x = -cubeSize
+                cube.frame.origin.y = CGFloat.random(in: 0...(scrollView.contentSize.height - cubeSize))
+            }
+            
+            // Ignorar coches fuera del rango cercano al jugador
+            if abs(cube.frame.midY - movingRectangle.frame.midY) > 200 {
                 continue
             }
-
-            // Calcular las distancias entre el cubo y el jugador
+            
+            // Verificar colisión precisa con distancias
             let distanceToPlayerX = abs(cube.frame.midX - movingRectangle.frame.midX)
             let distanceToPlayerY = abs(cube.frame.midY - movingRectangle.frame.midY)
-
-            // Verificar colision precisa
-            if distanceToPlayerX <= cubeSize / 2 && distanceToPlayerY <= cubeSize / 2 {
-                if cube.backgroundColor != .gray {
-                    cube.backgroundColor = .gray // Cambiar color para indicar colisión
-                    //vidas -= 1
-                    loseLife()
-                    print("Vidas restantes: \(vidas)")
-                }
-            }
-
-            // Reiniciar posicion si el coche sale de la pantalla
-            if cube.frame.origin.x > 590 {
-                cube.frame.origin.x = -cubeSize //Reiniciar fuera de la pantalla
-                //cube.backgroundColor = .red //color original
+            
+            if distanceToPlayerX <= cubeSize && distanceToPlayerY <= cubeSize {
+                handleCollision(currentTime: currentTime)
             }
         }
     }
+    
+    func handleCollision(currentTime: TimeInterval) {
+        // Verificar si el jugador está en el pasto
+        if isPlayerOnGrass() {
+            print("Jugador en el pasto")
+            return // No hacer nada si está en el pasto
+        }
+        
+        // efectos de la colision
+        if currentTime - lastCollisionTime >= collisionCooldown {
+            lastCollisionTime = currentTime
+            loseLife()
+            print("Vidas restantes: \(vidas)")
+        }
+    }
+    
+    
+    
+    
+    /*
+     let maxVisibleCubes = 10 // Máximo de coches visibles
+     
+     @objc func updateCubes() {
+     let currentTime = Date().timeIntervalSince1970
+     
+     for (index, cube) in cubes.enumerated() {
+     if index >= maxVisibleCubes { break } // Procesar solo los primeros 10 coches
+     
+     // Actualizar posición del coche
+     cube.frame.origin.x += cubeSpeed
+     
+     // Reiniciar posición si el coche sale de la pantalla
+     if cube.frame.origin.x > scrollView.contentSize.width {
+     cube.frame.origin.x = -cubeSize
+     cube.frame.origin.y = CGFloat.random(in: max(0, movingRectangle.frame.minY - 500)...min(scrollView.contentSize.height, movingRectangle.frame.maxY + 500))
+     }
+     
+     // Verificar si el jugador está en el pasto
+     if isPlayerOnGrass() {
+     continue // Si está en el pasto, ignorar las colisiones
+     }
+     
+     // Verificar colisiones solo si está cerca del jugador
+     let distanceToPlayerX = abs(cube.frame.midX - movingRectangle.frame.midX)
+     let distanceToPlayerY = abs(cube.frame.midY - movingRectangle.frame.midY)
+     
+     if distanceToPlayerX <= cubeSize / 2 && distanceToPlayerY <= cubeSize / 2 {
+     if currentTime - lastCollisionTime >= collisionCooldown {
+     lastCollisionTime = currentTime
+     loseLife()
+     print("Vidas restantes: \(vidas)")
+     }
+     }
+     }
+     }
+     */
+    
+    
+    
+    /*
+     func handleCollision() {
+     let currentTime = Date().timeIntervalSince1970
+     if currentTime - lastCollisionTime >= collisionCooldown {
+     lastCollisionTime = currentTime
+     loseLife()
+     print("Vidas restantes: \(vidas)")
+     }
+     }
+     */
+    
+    
+    
+    var cubePool: [UIView] = []
+    let carImages = ["car10", "car2", "car3","car4","car5"]
+    
+    func getOrCreateCube() -> UIView {
+        if let cube = cubePool.first(where: { $0.isHidden }) {
+            cube.isHidden = false
+            return cube
+        }
+        
+       //crearr
+        let newCube = UIImageView(frame: CGRect(x: 0, y: 0, width: cubeSize, height: cubeSize))
+        
+        // Seleccionar una imagen aleatoria del array
+        let randomCarImage = carImages.randomElement() ?? "car10"
+        newCube.image = UIImage(named: randomCarImage)
+        newCube.contentMode = .scaleAspectFill
+        
+        cubePool.append(newCube)
+        carContainerView.addSubview(newCube)
+        return newCube
+    }
+    
+    
+    /*
+    func getOrCreateCube() -> UIView {
+        if let cube = cubePool.first(where: { $0.isHidden }) {
+            cube.isHidden = false
+            return cube
+        }
+        
+        
+        let newCube = UIImageView(frame: CGRect(x: 0, y: 0, width: cubeSize, height: cubeSize))
+        newCube.image = UIImage(named: "car10")
+        newCube.contentMode = .scaleAspectFill
+        cubePool.append(newCube)
+        carContainerView.addSubview(newCube)
+        return newCube
+        
+    }
+     */
+    
+    func setupCubes() {
+        generateRoadSections2() //neeed sections first
+        
+        //Ocultar los cubos existentes en lugar de eliminarlos
+        for cube in cubes {
+            cube.isHidden = true
+        }
+        cubes.removeAll()
+        
+        for roadFrame in roadSections {
+            for i in 0..<numberOfCubes {
+                let cubeX = CGFloat(i) * (cubeSize + 70)
+                let cubeY = roadFrame.minY + (roadFrame.height / 2) - (cubeSize / 2)
+                
+                let cube = getOrCreateCube()
+                cube.frame.origin = CGPoint(x: cubeX, y: cubeY)
+                cubes.append(cube)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
     
     //Coches Track
     /*
-    var positionTrackerTimer: Timer?
-    
-    
-    func startTrackingCarPositions() {
-        // Iniciar un timer que se ejecuta cada 0.5 segundos
-        positionTrackerTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            self?.logCarPositions()
-        }
-    }
+     var positionTrackerTimer: Timer?
      
-
-    func stopTrackingCarPositions() {
-        // Detener el timer si existe
-        positionTrackerTimer?.invalidate()
-        positionTrackerTimer = nil
-    }
-
-    func logCarPositions() {
-        for (index, car) in cars.enumerated() {
-            print("Car \(index): Position x = \(car.frame.origin.x), y = \(car.frame.origin.y)")
-        }
-    }
+     
+     func startTrackingCarPositions() {
+     // Iniciar un timer de 0.5 segundos
+     positionTrackerTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+     self?.logCarPositions()
+     }
+     }
+     
+     
+     func stopTrackingCarPositions() {
+     // Detener el timer si existe
+     positionTrackerTimer?.invalidate()
+     positionTrackerTimer = nil
+     }
+     
+     func logCarPositions() {
+     for (index, car) in cars.enumerated() {
+     print("Car \(index): Position x = \(car.frame.origin.x), y = \(car.frame.origin.y)")
+     }
+     }
      */
-  
     
-
+    
+    
     
     //Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba
     //Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba
     //Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba
     //Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba Codigo de prueba
     //FIN
-
+    
     
     
     
@@ -721,27 +1140,27 @@ class ScrollingViewController: UIViewController {
         // Ajustar la posición inicial del coche fuera del rango visible
         carView.frame.origin.x = CGFloat.random(in: 650...750) // Comienza fuera de la pantalla visible
         
-        // Iniciar el movimiento hacia la izquierda
-        startContinuousCarMovement(for: carView)
+        // Iniciar el movimiento izq
+        //ContinuousCarMovement(for: carView)
     }
-
     
-    func startContinuousCarMovement(for car: UIView) {
-        let speed = CGFloat(50 + Int.random(in: 2...3)) // Velocidad más baja
+    
+    func ContinuousCarMovement(for car: UIView) {
+        let speed = CGFloat(50 + Int.random(in: 2...3)) // Velocidad mas baja
         let destinationX: CGFloat = -car.frame.width // Punto donde desaparece
-
+        
         UIView.animate(withDuration: Double((car.frame.origin.x - destinationX) / speed), delay: 0, options: [.curveLinear], animations: {
             car.frame.origin.x = destinationX
         }) { _ in
             // Reiniciar posición del coche
             car.frame.origin.x = CGFloat.random(in: 650...750)
             car.frame.origin.y = CGFloat.random(in: 100...self.scrollLimitY)
-            self.startContinuousCarMovement(for: car)
+            self.ContinuousCarMovement(for: car)
         }
     }
     
     func generateRoadSections() {
-        let roadHeight: CGFloat = 60 // Altura de cada carretera
+        let roadHeight: CGFloat = 60 //Altura de cada carretera
         let roadYPositions = stride(from: 100, to: scrollLimitY, by: roadHeight).map { $0 }
         
         for yPosition in roadYPositions {
@@ -749,14 +1168,23 @@ class ScrollingViewController: UIViewController {
             roadSections.append(roadFrame)
         }
     }
-
-
+    
+    func generateRoadSections2() {
+        guard roadSections.isEmpty else { return }
+        let roadHeight: CGFloat = 60
+        roadSections = stride(from: 100, to: scrollLimitY, by: roadHeight).map { yPosition in
+            CGRect(x: 0, y: yPosition, width: scrollLimitX, height: roadHeight)
+        }
+    }
+    
+    
+    
     
     func setupCars() {
         guard !roadSections.isEmpty else {
             return
         }
-
+        
         // Limpiar coches anteriores
         cars.forEach { $0.removeFromSuperview() }
         cars.removeAll()
@@ -773,76 +1201,129 @@ class ScrollingViewController: UIViewController {
         
         //startTrackingCarPositions()
     }
-
+    
     
     
     
     //COCHES FIN
-   
     
     
     
     
+    func stopAllTimers() {
+        //Detener el Timer del movimiento de los coches
+        if let movementTimer = movementTimer {
+            movementTimer.invalidate()
+            self.movementTimer = nil
+            print("Timer de movimiento detenido")
+        }
+        
+        //Detener el Timer de las hojas
+        if let energyTimer = energyTimer {
+            energyTimer.invalidate()
+            self.energyTimer = nil
+            print("Timer de hojas detenido")
+        }
+    }
     
     
     
-    
-    
-    
-    
-    
-    
-
     
     //Añadir mas cosas para garantizar que el juego se reinicie y corra bien desde el menu en caso de jugar
     //varias veces
     func resetGameState() {
-        //Eliminar todos los subviews del scrollView y de la vista principal
+        stopAllTimers() // Detener cualquier Timer activo
+        stopLeafFallAnimation()
+        
+        
+        //Detener musica al acabar el juego
+        AudioManager.shared.stopBackgroundMusic() // Detiene la música
+        AudioManager.shared.stopWalkingSound() //Detiene walking
+        AudioManager.shared.stopStreet() //Bye sonido de calle (coches)
+
+        
+        // Reiniciar elementos visuales
         scrollView?.subviews.forEach { $0.removeFromSuperview() }
         self.view.subviews.forEach {
             if $0 !== scrollView { $0.removeFromSuperview() }
         }
         
-        //Detener todos los temporizadores y animaciones
-        //stopAllTimers()
-        stopLeafFallAnimation()
+        // Reiniciar los coches
+        cubes.forEach { $0.layer.removeAllAnimations() }
+        cubes.forEach { $0.removeFromSuperview() }
+        cubes.removeAll()
+        cars.forEach { $0.removeFromSuperview() }
+        cars.removeAll()
         
-        // 3. Reiniciar estados globales
+        
+        // Reiniciar los árboles (Si no se hace apareceran de forma "invisible"), igual los demas elementos
+            borderImages.forEach { $0.removeFromSuperview() } // Eliminar de la vista
+            borderImages.removeAll() // Limpiar el array de árboles
+        
+        // Reiniciar las basuras
+          staticImages.forEach { $0.removeFromSuperview() }
+          staticImages.removeAll()
+        
+        // Reiniciar los panels
+         panels.forEach { $0.removeFromSuperview() }
+         panels.removeAll()
+        
+        // Reiniciar las hojas
+        activeLeaves.forEach { $0.layer.removeAllAnimations() }
+        activeLeaves.forEach { $0.removeFromSuperview() }
+        activeLeaves.removeAll()
+        
+        // Reiniciar variables globales
+        collectedCoins = 0
+        depositedCoins = 0
+        cubeSpeed = 3.0
         vidas = 3
         playerEnergy = 100.0
         isGameRunning = false
-        depositedCoins = 0
-        collectedCoins = 0
         direction = .zero
-        spriteIndex = 0
-
-        //Limpiar hojas activas
-        activeLeaves.forEach { $0.removeFromSuperview() }
-        activeLeaves.removeAll()
-
-        //Limpiar arrays de elementos del juego
-        borderImages.removeAll()
-        staticImages.removeAll()
-        cars.removeAll()
-        cubes.forEach { $0.removeFromSuperview() }
-        cubes.removeAll()
-        placedElements.removeAll()
-        depositZones.removeAll()
-        roadSections.removeAll()
-        resetParticles()
-
-        //Restaurar el scrollView
-        scrollView?.contentOffset = .zero // Llevar al inicio
+        
+        
+        // Reiniciar el estado del scrollView
+        scrollView?.contentOffset = .zero
         scrollView?.contentSize = CGSize(width: scrollLimitX, height: scrollLimitY)
-
-        //Limpieza de containers
+        
+        // Limpieza adicional
         containerView?.subviews.forEach { $0.removeFromSuperview() }
         containerView?.removeFromSuperview()
         roadContainerView?.subviews.forEach { $0.removeFromSuperview() }
         roadContainerView?.removeFromSuperview()
+        
+        
+        print("Estado del juego reiniciado")
     }
+    
+ 
+        func getScoreMessage(for score: Int) -> String {
+            switch score {
+            case 1...10:
+                return "Lo equivalente a una bolsa pequeña"
+            case 10...20:
+                return "Lo equivalente a una bolsa"
+            case 21...30:
+                return "Lo equivalente a un cubo"
+            case 31...50:
+                return "Lo equivalente a un barril"
+            case 51...100:
+                return "Lo equivalente a un contenedor pequeño"
+            case 101...200:
+                return "Lo equivalente a un camión pequeño"
+            case 201...500:
+                return "Lo equivalente a un camión grande"
+            case 501...:
+                return "¡Eres un héroe del reciclaje!"
+            default:
+                return "0 es 0"
+            }
+        }
 
-
+    
+    
+    
     
     
     
@@ -850,44 +1331,77 @@ class ScrollingViewController: UIViewController {
     //NEW
     // Mostrar el menu principal
     func showMainMenu() {
-        
         resetGameState()
-    
-        stopLeafFallAnimation()
         
-        // Elimina todas las vistas del juego activas
-            scrollView?.removeFromSuperview()
-            movingRectangle?.removeFromSuperview()
+        //Elimina las vistas activas del juego
+        scrollView?.removeFromSuperview()
+        movingRectangle?.removeFromSuperview()
         
-        
+        //Crear la vista del menu
         let menuView = UIView(frame: self.view.bounds)
         menuView.backgroundColor = .white
         menuView.tag = 999
         self.view.addSubview(menuView)
         
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 100, width: self.view.bounds.width, height: 50))
-        titleLabel.text = "Videojuego"
+       
+        let headerHeight: CGFloat = 100.0
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: headerHeight))
+        headerView.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 1.0)
+        menuView.addSubview(headerView)
+        
+
+        let headerLabel = UILabel(frame: CGRect(x: 16, y: 45, width: headerView.bounds.width / 2, height: 40))
+        headerLabel.text = "Juego"
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 28)
+        headerLabel.textColor = .white
+        headerLabel.textAlignment = .left
+        headerView.addSubview(headerLabel)
+        
+        
+        let logoImageView = UIImageView(frame: CGRect(x: headerView.bounds.width - 100, y: 20, width: 100, height: 100))
+        logoImageView.image = UIImage(named: "1cc090f9-c5f6-4bb7-bb0d-e219599ca5c7")
+        logoImageView.contentMode = .scaleAspectFit
+        headerView.addSubview(logoImageView)
+        
+        //Bajo de H
+        let contentOffset: CGFloat = headerHeight + 20
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: contentOffset + 20, width: self.view.bounds.width, height: 50))
+        titleLabel.text = "Cleany Roads"
         titleLabel.textColor = .black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textAlignment = .center
         menuView.addSubview(titleLabel)
         
-        let startButton = UIButton(frame: CGRect(x: 50, y: 200, width: self.view.bounds.width - 100, height: 50))
-        startButton.setTitle("Star Game", for: .normal)
-        startButton.backgroundColor = .green
+        //Puntuacoón más alta
+        let highScoreLabel = UILabel(frame: CGRect(x: 0, y: contentOffset + 80, width: self.view.bounds.width, height: 50))
+        let highestScore = ModelManager.instance.getHighestScore() // Recuperar la puntuacion más alta
+        highScoreLabel.text = "Record: \(highestScore)"
+        highScoreLabel.textColor = .darkGray
+        highScoreLabel.font = UIFont.systemFont(ofSize: 18)
+        highScoreLabel.textAlignment = .center
+        menuView.addSubview(highScoreLabel)
+        
+        //Mostrar mensaje basado en la puntuacion
+        let scoreMessageLabel = UILabel(frame: CGRect(x: 0, y: contentOffset + 140, width: self.view.bounds.width, height: 50))
+        scoreMessageLabel.text = getScoreMessage(for: highestScore)
+        scoreMessageLabel.textColor = .blue
+        scoreMessageLabel.font = UIFont.systemFont(ofSize: 16)
+        scoreMessageLabel.textAlignment = .center
+        menuView.addSubview(scoreMessageLabel)
+        
+        //Boton para iniciar el juego
+        let startButton = UIButton(frame: CGRect(x: 50, y: contentOffset + 200, width: self.view.bounds.width - 100, height: 50))
+        startButton.setTitle("Start Game", for: .normal)
+        startButton.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 1.0)
+        startButton.layer.cornerRadius = 8
         startButton.addTarget(self, action: #selector(startGame), for: .touchUpInside)
         menuView.addSubview(startButton)
-        //Posible boton de tutorial/enseñar lo basico
         
-        
-        
-        let optionButton = UIButton(frame: CGRect(x: 50, y: 280, width: self.view.bounds.width - 100, height: 50))
-        optionButton.setTitle("Botón 2", for: .normal)
-        optionButton.backgroundColor = .green
-        menuView.addSubview(optionButton)
-         
     }
-         
+
+
+    
     
     @objc func startGame() {
         guard let menuView = self.view.viewWithTag(999) else { return }
@@ -908,13 +1422,38 @@ class ScrollingViewController: UIViewController {
     }
     
     
-    var collectedCoinsCapacity: Int = 10 // Capacidad máxima de monedas
+    func endGame(reason: String) {
+        isGameRunning = false
+        
+        // Detener el temporizador de energia
+        energyTimer?.invalidate()
+        
+        // Guardar la puntuacion actual en la base de datos
+            let finalScore = depositedCoins
+            if ModelManager.instance.saveHighScore(score: finalScore) {
+                print("Puntuación \(finalScore) guardada exitosamente.")
+            } else {
+                print("Error en BD")
+            }
+        
+        // Mostrar alertas de fin del juego
+        let alert = UIAlertController(title: "Juego Terminado", message: reason, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Volver al Menú", style: .default) { _ in
+            self.showMainMenu()
+        })
+        self.present(alert, animated: true, completion: nil)
+        
+        resetGameState()
+    }
+    
+    
+    var bolsaCapacidad: Int = 10 // Capacidad maxima de basuras (aumentar?)
     var collectedCoinsBar: UIProgressView! // Barra de progreso para las monedas recogidas
-    var energyBar: UIProgressView! // Barra de energía del jugador
+    var energyBar: UIProgressView! // Barra de energy del jugador
     
     // Configuración de la interfaz de juego
     func setupGameUI() {
-        // Etiqueta de vidas
+        //Vidas
         livesLabel = UILabel(frame: CGRect(x: 20, y: 20, width: 200, height: 30))
         livesLabel.text = "Vidas: \(vidas)"
         livesLabel.textColor = .white
@@ -923,44 +1462,44 @@ class ScrollingViewController: UIViewController {
         // Barra de monedas recogidas
         collectedCoinsBar = UIProgressView(progressViewStyle: .default)
         collectedCoinsBar.frame = CGRect(x: self.view.bounds.width - 120, y: 20, width: 100, height: 10)
-        collectedCoinsBar.progressTintColor = .yellow // Color de la barra
-        collectedCoinsBar.trackTintColor = .darkGray // Color del fondo
-        collectedCoinsBar.progress = Float(collectedCoins) / Float(collectedCoinsCapacity) // Actualiza el progreso inicial
+        collectedCoinsBar.progressTintColor = .yellow
+        collectedCoinsBar.trackTintColor = .darkGray
+        collectedCoinsBar.progress = Float(collectedCoins) / Float(bolsaCapacidad) //Actualiza el progreso inicial
         self.view.addSubview(collectedCoinsBar)
         
         // Barra de energia
         energyBar = UIProgressView(progressViewStyle: .default)
         energyBar.frame = CGRect(x: self.view.bounds.width - 120, y: 40, width: 100, height: 10)
-        energyBar.progressTintColor = .blue // Color de la barra
-        energyBar.trackTintColor = .darkGray // Color del fondo
-        energyBar.progress = Float(playerEnergy / 100.0) // Progreso inicial
+        energyBar.progressTintColor = .blue
+        energyBar.trackTintColor = .darkGray
+        energyBar.progress = Float(playerEnergy / 100.0) //Progreso inicial
         self.view.addSubview(energyBar)
     }
     
     
     /*
-    // Configuración de la barra de energía
-    func startEnergyTimer() {
-        energyTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
-            self.reduceEnergy()
-        }
-    }
+     // Configuración de la barra de energía
+     func startEnergyTimer() {
+     energyTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+     guard let self = self else { return }
+     self.reduceEnergy()
+     }
+     }
      */
     
     func reduceEnergy() {
         guard isGameRunning else { return }
         playerEnergy -= 2.0 / 4.0 //rate en que se reduce la energia, parece bien
-        energyBar.progress = Float(playerEnergy / 100.0) // Actualiza la barra de energía
-
+        energyBar.progress = Float(playerEnergy / 100.0) // Actualiza la barra de energia
+        
         if playerEnergy <= 0 {
             endGame(reason: "Energia agotada") // Finaliza el juego si se queda sin energía
         }
     }
-
     
-    // Configuración del botón para pruebas (quitar vidas)
-    func setupDebugButton() {
+    
+    // Configuracion del boton para pruebas (quitar vidas)
+    func DebugButton() {
         let debugButton = UIButton(frame: CGRect(x: self.view.bounds.width - 120, y: 100, width: 100, height: 40))
         debugButton.setTitle("Quitar Vida", for: .normal)
         debugButton.backgroundColor = .red
@@ -1006,21 +1545,6 @@ class ScrollingViewController: UIViewController {
         }
     }
     
-    func endGame(reason: String) {
-        isGameRunning = false
-        
-        // Detener el temporizador de energía
-        energyTimer?.invalidate()
-        
-        // Mostrar alerta de fin del juego
-        let alert = UIAlertController(title: "Juego Terminado", message: reason, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Volver al Menú", style: .default) { _ in
-            self.showMainMenu()
-        })
-        self.present(alert, animated: true, completion: nil)
-        
-        resetGameState()
-    }
     
     
     //NEWS2
@@ -1047,7 +1571,7 @@ class ScrollingViewController: UIViewController {
         }
     }
     
-    func isCollidingWithTrees(playerFrame: CGRect) -> Bool {
+    func TreeChoque(playerFrame: CGRect) -> Bool {
         for tree in borderImages {
             if tree.frame.intersects(playerFrame) {
                 return true
@@ -1055,7 +1579,7 @@ class ScrollingViewController: UIViewController {
         }
         return false
     }
-
+    
     
     /*Piso Cafe
      func setupScrollView() {
@@ -1071,7 +1595,7 @@ class ScrollingViewController: UIViewController {
     
     
     
-   
+    
     //Basura label, se ve mas bonito pero ocupa mucho espacio
     func setupCoinLabel() {
         coinLabel = UILabel(frame: CGRect(x: 20, y: 40, width: 200, height: 40))
@@ -1137,14 +1661,14 @@ class ScrollingViewController: UIViewController {
             startFloatingAnimation(for: imageView)
         }
     }
-
+    
     
     
     func createBasura(imageSize: CGFloat) {
         let randomX = CGFloat.random(in: 0...(scrollLimitX - imageSize))
         //let randomY = CGFloat.random(in: 0...(scrollView.bounds.height - imageSize))
         let randomY = CGFloat.random(in: 0...(scrollLimitY - imageSize))
-
+        
         
         let imageView = UIImageView(frame: CGRect(x: randomX, y: randomY, width: imageSize, height: imageSize))
         
@@ -1173,12 +1697,12 @@ class ScrollingViewController: UIViewController {
     }
     
     //regenerar cuando son recogidas o salen de la vista
-    func regenerateImagesIfNeeded() {
+    func regenerateImages() {
         for (index, imageView) in staticImages.enumerated().reversed() {
             if imageIsOutOfView(imageView) || playerCollected(imageView) {
                 imageView.removeFromSuperview()
                 staticImages.remove(at: index)
-                createBasura(imageSize: 30.0) // Crea una nuevo colectible en una posición aleatoria
+                createBasura(imageSize: 30.0) // Crea basuras aleatoriamente
             }
         }
     }
@@ -1188,17 +1712,17 @@ class ScrollingViewController: UIViewController {
         return imageView.frame.origin.y > scrollView.bounds.height || imageView.frame.origin.x > scrollView.bounds.width
     }
     
-    // Simula si el jugador recoge una imagen
+    //Simula si el jugador recoge una imagen
     func playerCollected(_ imageView: UIImageView) -> Bool {
-       
+        
         return false
     }
     
     func setupControlButtons() {
         let buttonSize: CGFloat = 50.0
         let verticalOffset: CGFloat = 50.0
-        
-        // Botón derecha
+
+        // Boton derecha
         let rightButton = UIButton(frame: CGRect(
             x: (self.view.bounds.width - buttonSize) / 2 + 60,
             y: self.view.bounds.height - 150 - verticalOffset,
@@ -1207,9 +1731,11 @@ class ScrollingViewController: UIViewController {
         rightButton.setImage(UIImage(named: "right"), for: .normal)
         rightButton.addTarget(self, action: #selector(startMovingRight), for: .touchDown)
         rightButton.addTarget(self, action: #selector(stopMoving), for: [.touchUpInside, .touchUpOutside])
+        rightButton.addTarget(self, action: #selector(startPlayingSound), for: .touchDown)
+        rightButton.addTarget(self, action: #selector(stopPlayingSound), for: [.touchUpInside, .touchUpOutside])
         self.view.addSubview(rightButton)
-        
-        // Botón izquierda
+
+        // Boton izquierda
         let leftButton = UIButton(frame: CGRect(
             x: (self.view.bounds.width - buttonSize) / 2 - 60,
             y: self.view.bounds.height - 150 - verticalOffset,
@@ -1218,9 +1744,11 @@ class ScrollingViewController: UIViewController {
         leftButton.setImage(UIImage(named: "left"), for: .normal)
         leftButton.addTarget(self, action: #selector(startMovingLeft), for: .touchDown)
         leftButton.addTarget(self, action: #selector(stopMoving), for: [.touchUpInside, .touchUpOutside])
+        leftButton.addTarget(self, action: #selector(startPlayingSound), for: .touchDown)
+        leftButton.addTarget(self, action: #selector(stopPlayingSound), for: [.touchUpInside, .touchUpOutside])
         self.view.addSubview(leftButton)
-        
-        // Botón arriba
+
+        // Boton upup
         let upButton = UIButton(frame: CGRect(
             x: (self.view.bounds.width - buttonSize) / 2,
             y: self.view.bounds.height - 210 - verticalOffset,
@@ -1229,14 +1757,21 @@ class ScrollingViewController: UIViewController {
         upButton.setImage(UIImage(named: "up"), for: .normal)
         upButton.addTarget(self, action: #selector(startMovingUp), for: .touchDown)
         upButton.addTarget(self, action: #selector(stopMoving), for: [.touchUpInside, .touchUpOutside])
+        upButton.addTarget(self, action: #selector(startPlayingSound), for: .touchDown)
+        upButton.addTarget(self, action: #selector(stopPlayingSound), for: [.touchUpInside, .touchUpOutside])
         self.view.addSubview(upButton)
-        
-       
     }
 
-    
-    
+    //Music MUSICKEY3
+    @objc func startPlayingSound() {
+        AudioManager.shared.playWalkingSound()
+    }
 
+    @objc func stopPlayingSound() {
+        AudioManager.shared.stopWalkingSound()
+    }
+    
+    
     
     func setupRegenerateCoinsButton() {
         let regenerateButton = UIButton(frame: CGRect(x: self.view.bounds.width - 70, y: 40, width: 50, height: 50))
@@ -1273,11 +1808,11 @@ class ScrollingViewController: UIViewController {
     
     
     
-   
-   
     
     
-    func expandContentIfNeeded(forYPosition yPosition: CGFloat) {
+    
+    
+    func expandContent(forYPosition yPosition: CGFloat) {
         let expansionThreshold: CGFloat = 200.0
         
         // Expande hacia abajo cuando el personaje se acerca al borde inferior
@@ -1351,7 +1886,7 @@ class ScrollingViewController: UIViewController {
     
     
     
-   
+    
     
     
     @objc func stopMoving() {
@@ -1374,7 +1909,7 @@ class ScrollingViewController: UIViewController {
     
     //Array de PNG de hojas
     let leafImages: [UIImage] = [
-        UIImage(named: "leaf1")!, //leaf1...
+        UIImage(named: "leaf1")!,
         UIImage(named: "leafs2")!,
         UIImage(named: "leafs3")!,
         UIImage(named: "leafs4")!
@@ -1382,15 +1917,19 @@ class ScrollingViewController: UIViewController {
     ]
     
     func startLeafFallAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
+        stopLeafFallAnimation()
+        
+        particleTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
             for _ in 0..<3 {
                 self.createFallingLeaf()
             }
         }
+       
     }
     
+    
     var activeLeaves: [UIImageView] = [] // hojas activas
-
+    
     
     func createFallingLeaf() {
         let leafSize = CGSize(width: 30, height: 30)
@@ -1400,27 +1939,27 @@ class ScrollingViewController: UIViewController {
         leafImageView.tag = 1001 // tag para identificar las hojas
         self.view.addSubview(leafImageView)
         activeLeaves.append(leafImageView) // Añadir al array de hojas activas
-
+        
         // fall
         let totalDuration: TimeInterval = 8.0
         let numberOfZigzags = 4
         let zigzagDuration = totalDuration / Double(numberOfZigzags)
-
+        
         var currentDirection: CGFloat = 1.0
-
+        
         for i in 0..<numberOfZigzags {
             let nextX = currentDirection * CGFloat.random(in: 30...60)
             let nextY = CGFloat(i + 1) * (self.view.bounds.height / CGFloat(numberOfZigzags))
             let rotationAngle = CGFloat.random(in: -0.2...0.2) // Rotacion leve
-
+            
             UIView.animate(withDuration: zigzagDuration, delay: zigzagDuration * Double(i), options: [.curveEaseInOut], animations: {
                 leafImageView.center = CGPoint(x: leafImageView.center.x + nextX, y: nextY)
                 leafImageView.transform = leafImageView.transform.rotated(by: rotationAngle)
             }, completion: nil)
-
+            
             currentDirection *= -1.0
         }
-
+        
         // Desvanecer y remover la hoja despues de la animacion
         UIView.animate(withDuration: totalDuration, animations: {
             leafImageView.alpha = 0
@@ -1431,17 +1970,20 @@ class ScrollingViewController: UIViewController {
             leafImageView.removeFromSuperview()
         }
     }
-
+    
     
     func stopLeafFallAnimation() {
-        // Eliminar todas las hojas (subviews) del contenedor o vista principal
-        self.view.subviews.forEach { subview in
-            if subview.tag == 1001 { //tag unico para las hojas
-                subview.removeFromSuperview()
-            }
-        }
+        // Detener el Timer
+        particleTimer?.invalidate()
+        particleTimer = nil
+        print("Sistema de particulas detenido")
+        
+        // Eliminar todas las hojas activas
+        activeLeaves.forEach { $0.removeFromSuperview() }
+        activeLeaves.removeAll()
     }
-
+    
+    
     
     
     //Particulas
@@ -1464,7 +2006,7 @@ class ScrollingViewController: UIViewController {
     }
     
     var panels: [UIImageView] = []
-
+    
     
     func setupPanels(numberOfPanels: Int) {
         for _ in 0..<numberOfPanels {
@@ -1478,29 +2020,29 @@ class ScrollingViewController: UIViewController {
             panel.backgroundColor = UIColor.clear
             
             containerView.addSubview(panel)
-            panels.append(panel) // Guarda la referencia para detectar colisiones
+            panels.append(panel)
         }
     }
     
-    func checkCollisionWithPanels() {
+    func PanelsChoque() {
         for (index, panel) in panels.enumerated() {
             if movingRectangle.frame.intersects(panel.frame) {
                 // Recargar energía
                 playerEnergy = min(100.0, playerEnergy + 20.0) // Incrementa la energía, máximo 100
                 energyBar.progress = Float(playerEnergy / 100.0)
                 print("Energía recargada a \(playerEnergy)%")
-
-                // Elimina el panel del mapa
+                
+                // se elimina el panel
                 panel.removeFromSuperview()
-                panels.remove(at: index) // Elimina el panel de la lista
-                print("Panel \(index + 1) usado y eliminado.")
+                panels.remove(at: index) //Elimina el panel de la lista
+                AudioManager.shared.playPanelSound()
                 break
             }
         }
     }
-
-
-
+    
+    
+    
     
     
     
@@ -1509,9 +2051,9 @@ class ScrollingViewController: UIViewController {
     //IRRELEVANTES CON BUGS IRRELEVANTES CON BUGS IRRELEVANTES CON BUGS IRRELEVANTES CON BUGS
     
     
-
-
-
+    
+    
+    
     
     // Manejar el movimiento de cada zona de depósito
     @objc func moveDepositZone(_ gesture: UIPanGestureRecognizer) {
@@ -1555,7 +2097,7 @@ class ScrollingViewController: UIViewController {
             for _ in 0..<roadCount {
                 if currentY <= 0 { break }
                 for i in 0..<horizontalTiles {
-                    let roadView = UIImageView(image: roadImage)
+                    let roadView = UIImageView(image: roadCarre)
                     roadView.contentMode = .scaleAspectFill
                     roadView.frame = CGRect(x: CGFloat(i) * tileHeight, y: currentY, width: tileHeight, height: tileHeight)
                     roadContainerView.addSubview(roadView)
@@ -1573,11 +2115,11 @@ class ScrollingViewController: UIViewController {
     
     
     
-    func generateNewSectionsIfNeeded() {
+    func generateNewSections() {
         let tileHeight = floorImages.first!.size.height
         let currentOffsetY = scrollView.contentOffset.y
         
-        // Si el jugador está cerca de la parte superior, generamos nuevas secciones en la parte superior
+        // si jugador hasta arriba se hacen nuevgas secciones
         if movingRectangle.frame.origin.y - currentOffsetY < scrollView.bounds.height / 2 {
             var currentY: CGFloat = containerView.frame.minY - tileHeight // Comienza en la parte superior de containerView
             
@@ -1598,12 +2140,12 @@ class ScrollingViewController: UIViewController {
                 
                 // Generar secciones de carretera
                 let roadCount = Int.random(in: 4...7)
-                columnsWithCars.removeAll() // Reiniciar las columnas ocupadas para la nueva sección completa
+                columnsWithCars.removeAll() //Reiniciar las columnas ocupadas para la nueva sección completa
                 
                 for _ in 0..<roadCount {
                     if currentY <= currentOffsetY - scrollView.bounds.height { break }
                     for i in 0..<Int(scrollLimitX / tileHeight) {
-                        let roadView = UIImageView(image: roadImage)
+                        let roadView = UIImageView(image: roadCarre)
                         roadView.contentMode = .scaleAspectFill
                         roadView.frame = CGRect(x: CGFloat(i) * tileHeight, y: currentY, width: tileHeight, height: tileHeight)
                         roadContainerView.addSubview(roadView)
@@ -1695,7 +2237,7 @@ class ScrollingViewController: UIViewController {
     //Pasto
     //Pasto
     
-    //radio de protección para el pasto
+    //radio de proteccion para el pasto
     let grassProtectionRadius: CGFloat = 50.0
     
     //funcion para colocar el pasto en el mapa
@@ -1705,7 +2247,7 @@ class ScrollingViewController: UIViewController {
         for buildingFrame in placedElements {
             let distance = hypot(buildingFrame.midX - position.x, buildingFrame.midY - position.y)
             if distance < grassProtectionRadius {
-                return // Colisión detectada, no colocar pasto aquí
+                return
             }
         }
         
@@ -1737,7 +2279,7 @@ class ScrollingViewController: UIViewController {
         inventarioView.layer.cornerRadius = 20
         self.view.addSubview(inventarioView)
         
-        // Animar la aparición de la vista del inventario
+        // Animar la aparicion de la vista del inventario
         UIView.animate(withDuration: 0.3) {
             inventarioView.frame.origin.y = self.view.bounds.height * 0.2
         }
@@ -2193,7 +2735,7 @@ class ScrollingViewController: UIViewController {
     func setupLakes() {
         let lakeSize = CGSize(width: 80, height: 60)
         let protectionRadius: CGFloat = 30.0
-        let numberOfLakes = max(1, Int(scrollLimitX / 100)) // Ajusta el número de lagos según el área en X disponible
+        let numberOfLakes = max(1, Int(scrollLimitX / 100))
         
         for _ in 0..<numberOfLakes {
             var lakeFrame: CGRect
@@ -2234,27 +2776,7 @@ class ScrollingViewController: UIViewController {
     }
     //LAGOS
     //LAGOS
-    
-    
-    
-    
-    
-    //RESET GAME
-    //RESET GAME
-    
-    func resetParticles() {
-        // Invalidate the particle timer
-        particleTimer?.invalidate()
-        particleTimer = nil
-        
-        // Remove all existing leaves
-        self.view.subviews.forEach { subview in
-            if let imageView = subview as? UIImageView, leafImages.contains(imageView.image!) {
-                imageView.removeFromSuperview()
-            }
-        }
-    
-        
-    }
-    
 }
+    
+    
+    

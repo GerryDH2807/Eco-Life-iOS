@@ -311,4 +311,36 @@ class ModelManager: NSObject {
         // Retornamos el resultado de executeUpdate como un booleano
         return querySuccess // Este es un booleano
     }
+    
+    //BD JUEGO
+    func saveHighScore(score: Int) -> Bool {
+            sharedInstance.database!.open()
+            let isInserted = sharedInstance.database!.executeUpdate(
+                "INSERT INTO Highscores (score) VALUES (?);",
+                withArgumentsIn: [score]
+            )
+            sharedInstance.database!.close()
+
+            if isInserted {
+                print("Nueva puntuación guardada: \(score)")
+            } else {
+                print("Error al guardar la puntuación: \(sharedInstance.database!.lastErrorMessage())")
+            }
+            return isInserted
+        }
+
+        func getHighestScore() -> Int {
+            sharedInstance.database!.open()
+            var highestScore = 0
+            if let resultSet = sharedInstance.database!.executeQuery("SELECT MAX(score) FROM Highscores;", withArgumentsIn: []) {
+                if resultSet.next() {
+                    highestScore = Int(resultSet.int(forColumnIndex: 0))
+                }
+                resultSet.close()
+            }
+            sharedInstance.database!.close()
+
+            print("Puntuación más alta recuperada: \(highestScore)")
+            return highestScore
+        }
 }
